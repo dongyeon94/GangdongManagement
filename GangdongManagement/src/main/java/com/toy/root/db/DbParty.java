@@ -16,52 +16,43 @@ public class DbParty {
 	@GeneratedValue
 	private Long	id;
 	
-	private Date	roomCreateDate;
+	private Date	date;
 	
-	private int		degree;	 
+	private int		times;	 
 	
-	private int		userId;
+	private int		userPKId;
 
-
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 
-
-	public void setid(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
+	public Date getDate() {
+		return date;
+	}
 
-	public Date getRoomCreateDate() {
-		return roomCreateDate;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public int getTimes() {
+		return times;
+	}
+
+	public void setTimes(int times) {
+		this.times = times;
+	}
+
+	public int getUserPKId() {
+		return userPKId;
+	}
+
+	public void setUserPKId(int userPKId) {
+		this.userPKId = userPKId;
 	}
 
 
-	public void setRoomCreateDate(Date roomCreateDate) {
-		this.roomCreateDate = roomCreateDate;
-	}
-
-
-	public int getDegree() {
-		return degree;
-	}
-
-
-	public void setDegree(int degree) {
-		this.degree = degree;
-	}
-
-
-	public int getUserId() {
-		return userId;
-	}
-
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	
-	
-	
 }
