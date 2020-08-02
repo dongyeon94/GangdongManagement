@@ -16,7 +16,7 @@ public class DbUser {
 	@GeneratedValue
 	private Long	id;
 	
-	private String	userName;
+	private String	nickname;
 	
 	private int 	age;
 	
@@ -38,12 +38,12 @@ public class DbUser {
 		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getNickName() {
+		return nickname;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setNickName(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getAge() {
@@ -54,7 +54,7 @@ public class DbUser {
 		this.age = age;
 	}
 
-	public boolean isSex() {
+	public boolean isMan() {
 		return sex;
 	}
 
