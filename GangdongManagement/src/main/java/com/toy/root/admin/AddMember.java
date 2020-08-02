@@ -3,18 +3,16 @@ package com.toy.root.admin;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import com.toy.root.db.DbUser;
 import com.toy.root.repository.UserRepository;
 
 import com.toy.root.admin.ErrorList;
-import com.toy.root.admin.ErrorList;
+
 @Service
 public class AddMember {
-	@Autowired
-	private UserRepository _userRepo;
+
 	private String _nickname;
 	private int _age;
 	private String _location;
@@ -25,25 +23,18 @@ public class AddMember {
 	{
 		try
 		{
-			DbUser user = new DbUser();
+			GetMember getMember = new GetMember();
+			MemberInfo memberInfo = new MemberInfo();
 			
-			user.setUserName(_nickname);
-			user.setSex(_sex);
-			user.setAge(_age);
-			user.setMemo(_location);
-			user.setAlive(true);
+			memberInfo.set_age(_age);
+			memberInfo.set_alive(true);
+			memberInfo.set_joinDate(new Date(System.currentTimeMillis()));
+			memberInfo.set_memo(_location);
+			memberInfo.set_nickname(_nickname);
+			memberInfo.set_quitDate(new Date(Long.MAX_VALUE));
+			memberInfo.set_sex(_sex);
 			
-			user.setJoinDate(new Date(System.currentTimeMillis()));
-			user.setQuitDate(new Date(Long.MAX_VALUE));
-			
-			System.out.println(_nickname);
-			System.out.println(_sex);
-			System.out.println(_age);
-			System.out.println(_location);
-			System.out.println(user.getJoinDate());
-			System.out.println(user.getQuitDate());
-			
-			//_userRepo.save(user);
+			getMember.Set(memberInfo);
 		}
 		catch (Exception e)
 		{

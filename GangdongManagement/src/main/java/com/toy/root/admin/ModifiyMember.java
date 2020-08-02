@@ -11,10 +11,14 @@ import com.toy.root.repository.UserRepository;
 @Service
 public class ModifiyMember {
 	@Autowired
-	private UserRepository userrepo;
+	private UserRepository _userrepo;
 	
-	public List<DbUser> process(){
-		List<DbUser> li = userrepo.findAll();
-		return li;
+	public String process()
+	{
+		
+		
+		return ErrorList.ERROR_SUCCESS;
 	}
+	
+
 }
