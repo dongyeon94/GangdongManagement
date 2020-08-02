@@ -18,7 +18,7 @@ public class RemoveMember {
 		memberInfo = getMember.ByNickName(nickname);
 		if (null == memberInfo)
 		{
-			return ErrorList.ERROR_DUPLICATE_NICKNAME;
+			return ErrorList.ERROR_NOT_EXIST_NICKNAME;
 		}
 		
 		memberInfo.set_nickname(nickname + "_dead");
