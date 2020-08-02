@@ -2,45 +2,85 @@
 <html lang="en" 
 		xmlns:th="http://www.thymeleaf.org" 
 		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="layout.html :: head"></head>
 <body>
 
-	<h2>index page</h2>
-	<form action="/" method="post">
-		<button type="submit">button</button>
-	</form>
-
+	<h2>admin page</h2>
+	<!-- <form action="/" method="post">
+		<button type="submit"></button>
+	</form> -->
 	
-	<div>	
-		<table>
-			<tr th:each="list : ${list}">
-				<td th:text="${list.age}">id</td>
-				<td th:text="${list.sex}">id</td>
-				<td th:text="${list.userName}">id</td>
-				
-			</tr>
-			
-		</table>
+	<div style="height: 50px;"></div>
+<form class="formdata">	
+	<div >
+			<input type="date" name="datetimes">
+			<input type="radio" name="degree" value="1">1
+			<input type="radio" name="degree" value="2">2
+			<input type="radio" name="degree" value="3">3
+			<input type="radio" name="degree" value="4">4
+			<input type="button" onclick="search()" value="Search">
+		
 	</div>
 	
+	<div style="height: 50px;"></div>
+	<div class="container" style="margin: 0; margin-left: 5%; height: 10%;">
+		<div class="row" >
+		    <div class="col-4" style="border:solid 1px black; "  >		    	
+		    	
+		    	<table>
+		    		
+		    		<tr th:each="membetList : ${membetList}">
+		    			<td><input type="checkbox" class="membercheck" th:text="${membetList.nickName}" value="${membetList.nickName}" > </td>
+		    			<!-- <div><td th:text="${membetList.nickname}">nickname</td></div> -->
+		    		</tr>
+		    	</table>
+		    </div>
+		    <div class="col-8" style="border:solid 1px black;">
+		    	<table>
+		    		<!-- <tr th:each="list2 : ${list2}">
+		    			<div><td><input type="checkbox" th:text="${list2.userName}"></td></div>
+		    		</tr> -->
+		    	</table>
+		    </div>
+	  	</div>
+	</div>
+</form>
+	<form	action="/addParty" method="post">
+		<button type="submit">add party</button>
+	</form>
+	</div>
+	
+	
+	<div style="height: 50px;"></div>
 	<div>
-		<h2>맴버 추가</h2>
+		<h2>add member</h2>
 		<form action="/signup" method="post"> 			
 			<input type="text" >
 			<br/>
 			<input type="submit" value="signup">
 		</form>
 	</div>
+	<div style="height: 50px;"></div>		
+	<div>
+		<form action="/userProfile" method="get">
+			<button type="submit">user config</button>
+		</form>
+	</div>
+	
 </body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>  
+<script type="text/javascript">
+function search(){
+	var data = jQuery(".formdata").serialize();
+	console.log(data);
+	
+}
 
+</script>
 
 
 </html>
