@@ -22,7 +22,7 @@ public class DbUser {
 	
 	private boolean	sex; // M:true  W:false
 	
-	private boolean	status;
+	private boolean	alive;
 	
 	private String	memo;
 	
@@ -62,12 +62,12 @@ public class DbUser {
 		this.sex = sex;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public boolean isAlive() {
+		return alive;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setAlive(boolean status) {
+		this.alive = status;
 	}
 
 	public String getMemo() {
@@ -86,11 +86,11 @@ public class DbUser {
 		this.joinDate = joinDate;
 	}
 
-	public Date getOutDate() {
+	public Date getQuitDate() {
 		return quitDate;
 	}
 
-	public void setOutDate(Date quitDate) {
+	public void setQuitDate(Date quitDate) {
 		this.quitDate = quitDate;
 	}
 
