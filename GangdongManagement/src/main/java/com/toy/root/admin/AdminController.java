@@ -1,5 +1,6 @@
 package com.toy.root.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,16 @@ public class AdminController {
 	
 	@PostMapping("/signup")
 	public String signUp(@RequestParam String user) {
-		System.out.println(user);
-		
+		System.out.println(user);		
 		addmember.process(user);
 		return "redirect:/";
 	}
 	
+	@PostMapping("/tests")
+	public String tests(@RequestBody HashMap<String, Object> map) {
+		System.out.println("post mapping test");
+		System.out.println(map);
+		return "redirect:/";
+	}
 	
 }
