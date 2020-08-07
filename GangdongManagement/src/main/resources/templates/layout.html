@@ -50,11 +50,18 @@
 		  font-size: 36px;
 		  margin-left: 50px;
 		}
-		
+		.mainContent{
+			margin-left: 10%;
+			margin-top: 10%;
+		}
+		.container{
+			margin: 0; 
+		}
 		@media screen and (max-height: 450px) {
 		  .sidenav {padding-top: 15px;}
 		  .sidenav a {font-size: 18px;}
 		}
+		
 	</style>
     
 </head>
@@ -64,13 +71,74 @@
 <div th:fragment="sidenav">
 	<div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		  <a href="#">About</a>
-		  <a href="#">Services</a>
-		  <a href="#">Clients</a>
-		  <a href="#">Contact</a>
+		  <a href="#" onclick="mainVeiwContent('Chart')">Chart</a>
+		  <a href="#" onclick="mainVeiwContent('Select_Party')">Select Party</a>
+		  <a href="#" onclick="mainVeiwContent('Add_Member')">Add Member</a>
+		  <a href="#" onclick="mainVeiwContent('Member_Info')">Member Info</a>
 	</div>
 	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
 </div>
+
+<div class="Chart" th:fragment="selectPart" style="">
+	<h2>chart content</h2>
+</div>
+
+
+<div class="Select_Party" th:fragment="selectPart" style="display: none">
+	<form class="selectDateTimes">	
+		<div>
+			<input type="date" name="datetimes">			
+			<label for="cars">Choose a times:</label>
+			  <select class="Times-Select"  name="times" id="times">
+			    <option value="1">1</option>
+			    <option value="2">2</option>
+			    <option value="3">3</option>
+			    <option value="4">4</option>
+			    <option value="5">5</option>
+			  </select>		
+			  <input type="button" onclick="ajaxfunction()" value="Search">
+		</div>
+	</form>
+	<form class="userchecked">	
+		<div style="height: 50px;"></div>
+		<div class="container" >
+			<div class="row" >
+			    <div class="col-4" style="border:solid 1px black; "  >		    			    	
+			    	<table>		    		
+			    		<tr th:each="membetList : ${membetList}" th:object="${membetList}">
+			    			<td><input type="checkbox" class="membercheck" th:text="${membetList.nickName}"  th:name="${membetList.id}"></td>		    			
+			    		</tr>
+			    	</table>
+			    </div>
+		    	<div class="col-8" style="border:solid 1px black;">
+		    	</div>
+		  	</div>
+		</div>
+	</form>
+	<form	action="/addParty" method="post">
+		<button type="submit">add party</button>
+	</form>
+</div> 	
+
+
+
+<div class="Add_Member" th:fragment="addMember" style="display: none">
+	<h2>add member</h2>
+	<form action="/signup" method="post"> 			
+		<input type="text" >
+		<br/>
+		<input type="submit" value="signup">
+	</form>
+</div>
+
+
+
+<div class="Member_Info"  th:fragment="memberInfo" style="display: none">
+	<form action="/userProfile" method="get">
+		<button type="submit">Member_Info</button>
+	</form>
+</div>
+
       
 </body>
 <th:block th:fragment="scriptLayout">

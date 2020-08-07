@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.toy.root.db.DbParty;
 import com.toy.root.db.DbUser;
 import com.toy.root.repository.UserRepository;
 
@@ -23,6 +24,8 @@ public class AdminController {
 	@Autowired
 	private AddMember addmember;
 	
+	@Autowired
+	private testfunction test;
 	
 	@GetMapping("/")
 	public String mainPage(Model model) {		
@@ -39,6 +42,20 @@ public class AdminController {
 		System.out.println(user);		
 		addmember.process(user);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/tests2")
+	public String getTest() {
+		List<DbParty> li= test.findAllBetween();
+		System.out.println(li);
+		for(DbParty kk: li) {
+			System.out.println("-----------------------------");			
+			System.out.println(kk.getId());
+			System.out.println(kk.getUserPKId());
+			System.out.println(kk.getTimes());
+			System.out.println("-----------------------------");
+		}
+		return "index";
 	}
 	
 	@PostMapping("/tests")

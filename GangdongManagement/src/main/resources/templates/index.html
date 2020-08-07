@@ -8,63 +8,52 @@
 <div  th:replace="layout.html :: sidenav" > </div>
 
 
-<div style="height: 50px;"></div>
-<form class="selectDateTimes">	
-	<div>
-		<input type="date" name="datetimes">			
-		<label for="cars">Choose a times:</label>
-		  <select class="Times-Select"  name="times" id="times">
-		    <option value="1">1</option>
-		    <option value="2">2</option>
-		    <option value="3">3</option>
-		    <option value="4">4</option>
-		    <option value="5">5</option>
-		  </select>		
-		  <input type="button" onclick="ajaxfunction()" value="Search">
-	</div>
-</form>
+<div class="mainContent">
 
-<form class="userchecked">	
-	<div style="height: 50px;"></div>
-	<div class="container" style="margin: 0; margin-left: 5%; height: 10%;">
-		<div class="row" >
-		    <div class="col-4" style="border:solid 1px black; "  >		    			    	
-		    	<table>		    		
-		    		<tr th:each="membetList : ${membetList}" th:object="${membetList}">
-		    			<td><input type="checkbox" class="membercheck" th:text="${membetList.nickName}"  th:name="${membetList.id}"></td>		    			
-		    		</tr>
-		    	</table>
-		    </div>
-	    	<div class="col-8" style="border:solid 1px black;">
-	    	</div>
-	  	</div>
-	</div>
-</form>
+<div  th:replace="layout.html :: selectPart" > </div> 
+<div  th:replace="layout.html :: addMember" > </div> 
+<div  th:replace="layout.html :: memberInfo" > </div>
 
-<form	action="/addParty" method="post">
-	<button type="submit">add party</button>
-</form>
-	
-<div style="height: 50px;"></div>
-<div>
-	<h2>add member</h2>
-	<form action="/signup" method="post"> 			
-		<input type="text" >
-		<br/>
-		<input type="submit" value="signup">
-	</form>
-</div>
-
-<div style="height: 50px;"></div>		
-<div>
-	<form action="/userProfile" method="get">
-		<button type="submit">user config</button>
-	</form>
 </div>
 
 
 </body>
+
 <th:block th:replace="layout.html :: scriptLayout"></th:block>
+<script type="text/javascript">
+function  mainVeiwContent(flag){
+	console.log(flag);
+	if(flag==='Select_Party'){
+		$(document).ready(function(){
+			$('.Select_Party').css('display','');
+			$('.Chart').css('display','none');
+			$('.Add_Member').css('display','none');
+			$('.Member_Info').css('display','none');
+			closeNav();
+		})	
+	}else if(flag === 'Chart'){
+		$('.Select_Party').css('display','none');
+		$('.Chart').css('display','');
+		$('.Add_Member').css('display','none');
+		$('.Member_Info').css('display','none');
+		closeNav();
+	}else if(flag === 'Add_Member'){
+		$('.Select_Party').css('display','none');
+		$('.Chart').css('display','none');
+		$('.Add_Member').css('display','');
+		$('.Member_Info').css('display','none');
+		closeNav();
+	}else if(flag === 'Member_Info'){
+		$('.Select_Party').css('display','none');
+		$('.Chart').css('display','none');
+		$('.Add_Member').css('display','none');
+		$('.Member_Info').css('display','');
+		closeNav();
+	}
+	
+}
+</script>
+
 <script type="text/javascript">
 function ajaxfunction(){
 	
