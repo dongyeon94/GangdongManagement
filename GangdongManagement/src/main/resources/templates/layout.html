@@ -51,8 +51,9 @@
 		  margin-left: 50px;
 		}
 		.mainContent{
-			margin-left: 10%;
+			margin-left: 15%;
 			margin-top: 10%;
+			margin-right: 10%;
 		}
 		.container{
 			margin: 0; 
@@ -80,7 +81,11 @@
 </div>
 
 <div class="Chart" th:fragment="selectPart" style="">
-	<h2>chart content</h2>
+	<canvas id="myChart"></canvas>
+	<script type="text/javascript">
+	
+	
+	</script>
 </div>
 
 
@@ -122,26 +127,44 @@
 
 
 
-<div class="Add_Member" th:fragment="addMember" style="display: none">
-	<h2>add member</h2>
-	<form action="/signup" method="post"> 			
-		<input type="text" >
+<div class="Add_Member" th:fragment="addMember" style="display: none; width: 100%;">
+	<div style="width: 79%; float: left;" >
+		<label for="exampleInputEmail1">ADD Member</label>
+		<small id="emailHelp" class="form-text text-muted">We'll write text  ['지코/29/성내/남']   form </small>
 		<br/>
-		<input type="submit" value="signup">
-	</form>
+		<form action="/signup" method="post"> 			
+			<input type="text" style="width: 90%;">
+			<br/><br/>
+			<button type="submit" class="btn btn-primary" style="width: 90%;">ADD Member</button>		
+		</form>
+	</div>
+	<div style="width: 20%; float: left;">
+		<h2>Member List</h2>
+		</br>
+		<table>
+			<tr th:each="membetList : ${membetList}" th:object="${membetList}" >
+   				<td><span class="membercheck" th:text="${membetList.nickName}"  th:name="${membetList.id}"></span></td>		    			
+    		</tr>
+		</table>
+	</div>
 </div>
 
 
 
 <div class="Member_Info"  th:fragment="memberInfo" style="display: none">
-	<form action="/userProfile" method="get">
-		<button type="submit">Member_Info</button>
+	<form action="/userProfile" method="get">		
+		<table>
+			<tr th:each="membetList : ${membetList}" th:object="${membetList}">
+   				<td><input type="checkbox" class="membercheck" th:text="${membetList.nickName}"  th:name="${membetList.id}"></td>		    			
+    		</tr>
+		</table>
 	</form>
 </div>
 
       
 </body>
 <th:block th:fragment="scriptLayout">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
@@ -154,6 +177,38 @@
 	  document.getElementById("mySidenav").style.width = "0";
 	}
 </script>
+<script type="text/javascript">
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+/* 
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+});
+*
+*/
+</script>
+
+
 </th:block>
 
 </html>
