@@ -1,9 +1,11 @@
 package com.toy.root.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.toy.root.repository.UserRepository;
@@ -18,21 +20,33 @@ public class AddMember {
 	private String _location;
 	private boolean _sex;
 	final static int MAX_USER_INFO_CONTENT = 4;
+	@Autowired
+	private GetMember getMember;
 	
 	private String _SaveToDb()
 	{
 		try
 		{
-			GetMember getMember = new GetMember();
 			MemberInfo memberInfo = new MemberInfo();
+			
+//			Date dates = new Date(System.currentTimeMillis());
+//			
+//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");	
+//			Calendar c = Calendar.getInstance();
+//			c.setTime(dates);
+//			c.add(Calendar.YEAR, 100);
+//			String newdate = df.format(c.getTime());
+//			
 			
 			memberInfo.set_age(_age);
 			memberInfo.set_alive(true);
-			memberInfo.set_joinDate(new Date(System.currentTimeMillis()));
+			memberInfo.set_joinDate(new  Date(System.currentTimeMillis()) );
 			memberInfo.set_memo(_location);
 			memberInfo.set_nickname(_nickname);
-			memberInfo.set_quitDate(new Date(Long.MAX_VALUE));
+			memberInfo.set_quitDate(new Date("9999/12/31"));
 			memberInfo.set_sex(_sex);
+			
+			
 			
 			getMember.Set(memberInfo);
 		}
@@ -58,17 +72,14 @@ public class AddMember {
 	public String process(String userInfo)
 	{
 		//nickname/age/location/sex
-		
 		try 
 		{
 			String[] userInfoList = userInfo.split("/", MAX_USER_INFO_CONTENT);
-			String returnError;
-			
+			String returnError;			
 			_nickname = userInfoList[0];
 			_age = Integer.parseInt(userInfoList[1]);
 			_location = userInfoList[2];
 			_sex = _GetGender(userInfoList[3]);
-			
 			returnError = _SaveToDb();
 			if (!returnError.equals(ErrorList.ERROR_SUCCESS))
 			{

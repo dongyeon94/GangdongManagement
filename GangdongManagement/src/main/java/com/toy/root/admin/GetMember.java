@@ -2,6 +2,7 @@ package com.toy.root.admin;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.toy.root.db.DbUser;
@@ -11,7 +12,8 @@ import com.toy.root.admin.MemberInfo;
 import com.toy.root.admin.ErrorList;
 @Service
 public class GetMember {
-
+	
+	@Autowired
 	private UserRepository _userrepo;
 	
 	public MemberInfo ByNickName(String nickname)

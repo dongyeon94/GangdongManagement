@@ -160,9 +160,27 @@ function addPartyAjax(){
 		
 	}
 	
-	console.log(userList);
+/* 	console.log(userList);
 	console.log(partyDate);
-	console.log(partyTimes);
+	console.log(partyTimes); */
+	
+	var partyData = {'datetimes' :partyDate,
+			'times' : partyTimes,
+			'user' : userList };
+	
+	console.log(partyData);
+	
+	$.ajax({
+	type:		"POST",
+	url :		"http://localhost:8080/addParty",
+	data:		JSON.stringify(partyData),
+	contentType: "application/json; charset=UTF-8",
+	dataType:	"json",
+	success:function(){consle.log("success") }
+		
+	});
+	
+	
 }
 </script>
 </div> 	
@@ -174,10 +192,10 @@ function addPartyAjax(){
 		<label for="exampleInputEmail1">ADD Member</label>
 		<small id="emailHelp" class="form-text text-muted">We'll write text  ['지코/29/성내/남']   form </small>
 		<br/>
-		<form action="/signup" method="post"> 			
-			<input type="text" style="width: 90%;">
+		<form class="addMember" action="/signup" method="post"> 			
+			<input type="text" name="user" style="width: 90%;" >
 			<br/><br/>
-			<button type="submit" class="btn btn-primary" style="width: 90%;">ADD Member</button>		
+			<button type="submit" class="btn btn-primary"  style="width: 90%;">ADD Member</button>		
 		</form>
 	</div>
 	<div style="width: 20%; float: left;">
@@ -189,6 +207,27 @@ function addPartyAjax(){
     		</tr>
 		</table>
 	</div>
+	<script type="text/javascript">
+function addMemberAjax(){
+	var addMemberVal = jQuery(".addMember").serialize();	
+	var MemberData = {'member' :addMemberVal};
+	
+	console.log(MemberData);
+	
+	$.ajax({
+	type:		"POST",
+	url :		"http://localhost:8080/signup",
+	data:		JSON.stringify(MemberData),
+	contentType: "application/json; charset=UTF-8",
+	dataType:	"json",
+	success:function(){consle.log("success") }
+		
+	});
+	
+	
+}
+</script>
+	
 </div>
 
 

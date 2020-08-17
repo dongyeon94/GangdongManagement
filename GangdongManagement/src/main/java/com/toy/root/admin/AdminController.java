@@ -33,20 +33,24 @@ public class AdminController {
 	
 	@GetMapping("/")
 	public String mainPage(Model model) {		
-//		System.out.println(_getMemberList.process());
-//		System.out.println(_getMemberList.process().get(0).getNickName());
 		model.addAttribute("membetList", _getMemberList.process());
 		return "index";
 	}
-
 	
-	
-	@PostMapping("/signup")
-	public String signUp(@RequestParam String user) {
-		System.out.println(user);		
+	@PostMapping("/signup" )
+	public String signUp(@RequestParam String user) {	
 		addmember.process(user);
 		return "redirect:/";
 	}
+	
+	@PostMapping("/addParty")
+	public String addParty(@RequestBody HashMap<String, Object> map) {
+		System.out.println("add party test");
+		System.out.println(map);
+		System.out.println("//////////////");
+		return "redirect:/";
+	}
+	
 	
 	@GetMapping("/tests2")
 	public String getTest() throws ParseException {
@@ -66,19 +70,19 @@ public class AdminController {
 	public String tests(@RequestBody HashMap<String, Object> map) throws ParseException {
 		System.out.println("post mapping test");
 		System.out.println(map);
-		System.out.println(map.get("datetimes"));
+//		System.out.println(map.get("datetimes"));
 		System.out.println("//////////////");
 //		System.out.println(test.findAllBetween((String) map.get("datetimes")));
 		
-		List<DbParty> li= test.findAllBetween((String) map.get("datetimes"));
-		System.out.println(li);
-		for(DbParty kk: li) {
-			System.out.println("-----------------------------");			
-			System.out.println(kk.getId());
-			System.out.println(kk.getUserPKId());
-			System.out.println(kk.getTimes());
-			System.out.println("-----------------------------");
-		}
+//		List<DbParty> li= test.findAllBetween((String) map.get("datetimes"));
+//		System.out.println(li);
+//		for(DbParty kk: li) {
+//			System.out.println("-----------------------------");			
+//			System.out.println(kk.getId());
+//			System.out.println(kk.getUserPKId());
+//			System.out.println(kk.getTimes());
+//			System.out.println("-----------------------------");
+//		}
 		
 		return "redirect:/";
 	}
