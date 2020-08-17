@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,15 @@ public class testfunction {
 	@Autowired
 	private PartyRepository partRepo;
 	
-	public List<DbParty> findAllBetween(){
-		
-		String start = "2020-08-02";
-		String end = "2020-08-03";
-		List<DbParty> li = partRepo.findAllBetween(start, end);
+	public List<DbParty> findAllBetween(String date) throws ParseException{
+			
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");	
+		Calendar c = Calendar.getInstance();
+		c.setTime(df.parse(date));
+		c.add(Calendar.DATE, 1);
+		String newdate = df.format(c.getTime());
+
+		List<DbParty> li = partRepo.findAllBetween(date, newdate);
 		return li;
 	}
 	

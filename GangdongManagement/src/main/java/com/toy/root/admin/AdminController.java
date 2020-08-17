@@ -1,5 +1,9 @@
 package com.toy.root.admin;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,8 +49,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/tests2")
-	public String getTest() {
-		List<DbParty> li= test.findAllBetween();
+	public String getTest() throws ParseException {
+		List<DbParty> li= test.findAllBetween("dd");
 		System.out.println(li);
 		for(DbParty kk: li) {
 			System.out.println("-----------------------------");			
@@ -59,9 +63,23 @@ public class AdminController {
 	}
 	
 	@PostMapping("/tests")
-	public String tests(@RequestBody HashMap<String, Object> map) {
+	public String tests(@RequestBody HashMap<String, Object> map) throws ParseException {
 		System.out.println("post mapping test");
 		System.out.println(map);
+		System.out.println(map.get("datetimes"));
+		System.out.println("//////////////");
+//		System.out.println(test.findAllBetween((String) map.get("datetimes")));
+		
+		List<DbParty> li= test.findAllBetween((String) map.get("datetimes"));
+		System.out.println(li);
+		for(DbParty kk: li) {
+			System.out.println("-----------------------------");			
+			System.out.println(kk.getId());
+			System.out.println(kk.getUserPKId());
+			System.out.println(kk.getTimes());
+			System.out.println("-----------------------------");
+		}
+		
 		return "redirect:/";
 	}
 	
