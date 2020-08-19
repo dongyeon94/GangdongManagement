@@ -54,15 +54,10 @@ public class AdminController {
 	
 	@GetMapping("/tests2")
 	public String getTest() throws ParseException {
-		List<DbParty> li= test.findAllBetween("dd");
-		System.out.println(li);
-		for(DbParty kk: li) {
-			System.out.println("-----------------------------");			
-			System.out.println(kk.getId());
-			System.out.println(kk.getUserPKId());
-			System.out.println(kk.getTimes());
-			System.out.println("-----------------------------");
-		}
+		int a = 7;
+		String str = Integer.toBinaryString(a);
+		String str2 =  String.format("%8s", str).replace(' ', '0');
+		System.out.println(str2);
 		return "index";
 	}
 	

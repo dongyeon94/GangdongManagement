@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.GeneratedValue;
 
 public class PartyInfo {
+	
 	private Date	_date;
 	
 	private int		_times;	 

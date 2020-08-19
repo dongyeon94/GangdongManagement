@@ -20,6 +20,7 @@ public class AddMember {
 	private String _location;
 	private boolean _sex;
 	final static int MAX_USER_INFO_CONTENT = 4;
+	
 	@Autowired
 	private GetMember getMember;
 	
@@ -29,15 +30,6 @@ public class AddMember {
 		{
 			MemberInfo memberInfo = new MemberInfo();
 			
-//			Date dates = new Date(System.currentTimeMillis());
-//			
-//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");	
-//			Calendar c = Calendar.getInstance();
-//			c.setTime(dates);
-//			c.add(Calendar.YEAR, 100);
-//			String newdate = df.format(c.getTime());
-//			
-			
 			memberInfo.set_age(_age);
 			memberInfo.set_alive(true);
 			memberInfo.set_joinDate(new  Date(System.currentTimeMillis()) );
@@ -45,9 +37,7 @@ public class AddMember {
 			memberInfo.set_nickname(_nickname);
 			memberInfo.set_quitDate(new Date("9999/12/31"));
 			memberInfo.set_sex(_sex);
-			
-			
-			
+								
 			getMember.Set(memberInfo);
 		}
 		catch (Exception e)
@@ -58,6 +48,7 @@ public class AddMember {
 		
 		return ErrorList.ERROR_SUCCESS;
 	}
+	
 	private boolean _GetGender(String gender)
 	{
 		if (gender.startsWith("여"))
