@@ -34,6 +34,7 @@ public class AdminController {
 	@GetMapping("/")
 	public String mainPage(Model model) {		
 		model.addAttribute("membetList", _getMemberList.process());
+		System.out.println(_getMemberList.process());
 		return "index";
 	}
 	
