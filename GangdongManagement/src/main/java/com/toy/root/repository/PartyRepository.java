@@ -18,8 +18,12 @@ public interface PartyRepository extends JpaRepository<DbParty, Long>{
 
 	@Transactional
 	@Query(value = "SELECT * FROM GangdongGu.party where "
-			+ "room_create_date between :st and :en ;" ,nativeQuery = true)
+			+ "date between :st and :en ;" ,nativeQuery = true)
 	List<DbParty> findAllBetween(@Param("st") String start, @Param("en") String end);
 	
+	@Transactional
+	@Query(value = "SELECT * FROM GangdongGu.party where "
+			+ "date between :st and :en and userpkid = :user  ;" ,nativeQuery = true)
+	List<DbParty> findUserCurrentTime(@Param("user") int user  ,@Param("st") String start, @Param("en") String end);
 	
 }

@@ -29,12 +29,17 @@ public class AdminController {
 	private AddMember addmember;
 	
 	@Autowired
+	private AddParty addParty;
+	
+	
+	
+	@Autowired
 	private testfunction test;
 	
 	@GetMapping("/")
 	public String mainPage(Model model) {		
 		model.addAttribute("membetList", _getMemberList.process());
-		System.out.println(_getMemberList.process());
+//		System.out.println(_getMemberList.process());
 		return "index";
 	}
 	
@@ -48,9 +53,12 @@ public class AdminController {
 	public String addParty(@RequestBody HashMap<String, Object> map) {
 		System.out.println("add party test");
 		System.out.println(map);
-		System.out.println("//////////////");
+		addParty.process(map);
+		
 		return "redirect:/";
 	}
+	
+	
 	
 	
 	@GetMapping("/tests2")
