@@ -15,8 +15,6 @@ public class ModifiyMember {
 	
 	public String process()
 	{
-		
-		
 		return ErrorList.ERROR_SUCCESS;
 	}
 	

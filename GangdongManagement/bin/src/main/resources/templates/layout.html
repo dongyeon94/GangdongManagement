@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+<title>Gangdong</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+body {
+	font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+.sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+.mainContent {
+	margin-left: 15%;
+	margin-top: 10%;
+	margin-right: 10%;
+}
+
+.container {
+	margin: 0;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+}
+</style>
+
+</head>
+
+<body>
+
+	<div th:fragment="sidenav">
+		<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a href="#" onclick="mainVeiwContent('Chart')">Chart</a> <a href="#"
+				onclick="mainVeiwContent('Select_Party')">Select Party</a> <a
+				href="#" onclick="mainVeiwContent('Add_Member')">Add Member</a> <a
+				href="#" onclick="mainVeiwContent('Member_Info')">Member Info</a>
+		</div>
+		<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;
+			open</span>
+	</div>
+
+	<div class="Chart" th:fragment="selectPart" style="">
+		<h2><div id="today-time"></div></h2>
+		<canvas id="myChart"></canvas>
+		<script type="text/javascript">
+		checkTime();
+		function checkTime(){
+			var d = new Date(); 
+			var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
+			var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
+			var result = document.getElementById("today-time"); result.innerHTML =  currentDate +  currentTime;			 
+		}
+		setInterval("checkTime()",1000);
+		</script>
+	</div>
+
+
+	<div class="Select_Party" th:fragment="selectPart"
+		style="display: none">
+		<form class="selectDateTimes" action="">
+			<div>
+				<input type="date" name="datetimes"> <label for="cars">Choose
+					a times:</label> <select class="Times-Select" name="times" id="times">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select> <input type="button" onclick="ajaxfunction()" value="Search">
+			</div>
+		</form>
+		<form class="userchecked" action="">
+			<div style="height: 50px;"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-4" style="border: solid 1px black;">
+						<table>
+							<tr th:each="membetList : ${membetList}"
+								th:object="${membetList}">
+								<td><input type="checkbox" class="membercheck"
+									th:text="${membetList.nickName}" th:value="${membetList.id}"
+									th:name="memberList"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="col-8" style="border: solid 1px black;"></div>
+				</div>
+			</div>
+		</form>
+		<div style="height: 50px;"></div>
+
+		<div style="height: 20px;"></div>
+		<button type="button" onclick="addPartyAjax()">add party</button>
+
+
+		<script type="text/javascript">
+function addPartyAjax(){
+	var addPartyVal = jQuery(".userchecked").serialize().split('&');
+	var userList = [];
+	var partyDate = "";
+	var partyTimes = "";
+	
+	for(var i in addPartyVal){
+		userList.push( addPartyVal[i].split("=")[1] );
+	}
+	
+	
+	var addPartyDateVal = jQuery(".selectDateTimes").serialize().split('&');
+	for(var i in addPartyDateVal){
+		var  splitLi = addPartyDateVal[i].split('=');
+		if(splitLi[0]==='datetimes'){
+			if(splitLi.length>1){
+				partyDate =splitLi[1]; 
+			}	
+			else{
+				alert("please write times");
+			}
+		}
+		if(splitLi[0]==='times'){
+			if(splitLi.length>1){
+				partyTimes = splitLi[1];
+			}
+			else{
+				alert("please write times");
+			}
+		}
+		
+	}
+	
+/* 	console.log(userList);
+	console.log(partyDate);
+	console.log(partyTimes); */
+	
+	var partyData = {'datetimes' :partyDate,
+			'times' : partyTimes,
+			'user' : userList };
+	
+	console.log(partyData);
+	
+	$.ajax({
+	type:		"POST",
+	url :		"http://localhost:8080/addParty",
+	data:		JSON.stringify(partyData),
+	contentType: "application/json; charset=UTF-8",
+	dataType:	"json",
+	success:function(){consle.log("success") }
+		
+	});
+	
+	
+}
+</script>
+	</div>
+
+
+
+	<div class="Add_Member" th:fragment="addMember"
+		style="display: none; width: 100%;">
+		<div style="width: 79%; float: left;">
+			<label for="exampleInputEmail1">ADD Member</label> <small
+				id="emailHelp" class="form-text text-muted">We'll write text
+				['지코/29/성내/남'] form </small> <br />
+			<form class="addMember" action="/signup" method="post">
+				<input type="text" name="user" style="width: 90%;"> <br />
+				<br />
+				<button type="submit" class="btn btn-primary" style="width: 90%;">ADD
+					Member</button>
+			</form>
+		</div>
+		<div style="width: 20%; float: left;">
+			<h2>Member List</h2>
+			<br></br>
+			<table>
+				<tr th:each="membetList : ${membetList}" th:object="${membetList}">
+					<td><span class="membercheck" th:text="${membetList.nickName}"
+						th:name="${membetList.id}"></span></td>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+function addMemberAjax(){
+	var addMemberVal = jQuery(".addMember").serialize();	
+	var MemberData = {'member' :addMemberVal};
+	
+	console.log(MemberData);
+	
+	$.ajax({
+	type:		"POST",
+	url :		"http://localhost:8080/signup",
+	data:		JSON.stringify(MemberData),
+	contentType: "application/json; charset=UTF-8",
+	dataType:	"json",
+	success:function(){consle.log("success") }
+		
+	});
+	
+	
+}
+</script>
+
+	</div>
+
+
+
+	<div class="Member_Info" th:fragment="memberInfo" style="display: none">
+		<form action="/userProfile" method="get">
+			<table>
+				<tr th:each="membetList : ${membetList}" th:object="${membetList}">
+					<td><input type="checkbox" class="membercheck"
+						th:text="${membetList.nickName}" th:name="${membetList.id}"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+
+</body>
+<th:block th:fragment="scriptLayout">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"
+		type="text/javascript"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"
+		type="text/javascript"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	function openNav() {
+	  document.getElementById("mySidenav").style.width = "250px";
+	}
+	
+	function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+	<script type="text/javascript" th:inline="javascript">
+var ctx = document.getElementById('myChart').getContext('2d');
+var user = [[${membetList}]];
+var userlist=[];
+var userparty = [];
+for(var u in user){
+	userlist.push(user[u]["nickName"]);
+	userparty.push(user[u]["id"]);
+}
+
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+    // The data for our dataset
+    data: {
+        labels: userlist,
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: userparty
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+
+
+</th:block>
+
+</html>

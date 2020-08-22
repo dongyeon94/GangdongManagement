@@ -23,60 +23,72 @@ public class AddParty {
 	@Autowired
 	private GetParty getParty;
 	
-		
 	private String _SaveToDb() 
 	{	
 		try
 		{
 			PartyInfo partInfo = new PartyInfo();
-			if(_id !=null) partInfo.set_id(_id);
+			
+			if(_id != null)
+			{
+				partInfo.set_id(_id);
+			}
+			
 			partInfo.set_date(new  Date(System.currentTimeMillis()));
 			partInfo.set_times(_times);
 			partInfo.set_userPKId(_userPKId);
 			partInfo.set_date(_date);
+			
 			getParty.Set(partInfo);
 			
-		}catch (Exception e) 
+		} catch (Exception e) 
 		{
 			System.out.println(e);
 			return ErrorList.ERROR_DB_PERMISSION;
 		}			
+		
 		return ErrorList.ERROR_SUCCESS;
 	}
 	
-	
+
 	public String process(HashMap<String, Object> map)
 	{	
 		try
 		{	
-			String returnError = null;	
-			List li = (List) map.get("user");
-			int get_times = Integer.parseInt( (String) map.get("times") );
+			String returnError = ErrorList.ERROR_SUCCESS;
 			
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-			_date = transFormat.parse((String) map.get("datetimes"));
-									
-			for(int i=0 ;i< li.size();i++) {											
-				_userPKId = Integer.parseInt( (String) li.get(i) );				
-				List<DbParty>  check = getParty.userDataFind( _userPKId,(String) map.get("datetimes") );				
-				if ( check.size() >0 ) {
-					_id = check.get(0).getId();
-					String tmp_times = new BitConvert().BitConvert(check.get(0).getTimes());
-					String str_times = tmp_times.substring(0,8-get_times) + '1' + tmp_times.substring(9-get_times);
-					_times = new BitConvert().BitConvert(str_times);
+			List listUserID = (List)map.get("user");
+			long longWhichTimesAttend = Integer.parseInt((String) map.get("times"));
+			SimpleDateFormat dateAttend = new SimpleDateFormat("yyyy-MM-dd");
+			
+			_date = dateAttend.parse((String) map.get("datetimes"));
+			for(int i = 0; i < listUserID.size(); i++) 
+			{			
+				_userPKId = Integer.parseInt( (String) listUserID.get(i));
+				List<DbParty> listAttandantOnTheDate = getParty.userDataFind(_userPKId, (String)map.get("datetimes"));
+				
+				// size is 1 or 0
+				if (listAttandantOnTheDate.size() > 0) 
+				{
+					int bmpAttendance = listAttandantOnTheDate.get(0).getTimes();
+					bmpAttendance |= (1 << longWhichTimesAttend);
+					
+					_times = bmpAttendance;
+					_id = listAttandantOnTheDate.get(0).getId();
 				}
-				else {
+				else
+				{
+					_times = (1 << longWhichTimesAttend);
 					_id = null;
-					String tmp_times = new BitConvert().BitConvert(0);
-					String str_times = tmp_times.substring(0,8-get_times) + '1' + tmp_times.substring(9-get_times);
-					_times = new BitConvert().BitConvert(str_times);
-				}			
+				}		
+	
 				returnError = _SaveToDb();
 			}						
 			if (!returnError.equals(ErrorList.ERROR_SUCCESS))
 			{
 				return returnError;
 			}
+			
 		}
 		catch (Exception e) 
 		{

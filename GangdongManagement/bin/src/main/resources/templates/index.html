@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" 
+		xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout.html :: head"></head>
+
+<body style="background-color: #EEEEEE">
+
+<div  th:replace="layout.html :: sidenav" > </div>
+
+
+<div class="mainContent">
+
+<div  th:replace="layout.html :: selectPart" > </div> 
+<div  th:replace="layout.html :: addMember" > </div> 
+<div  th:replace="layout.html :: memberInfo" > </div>
+
+</div>
+
+
+</body>
+
+<th:block th:replace="layout.html :: scriptLayout"></th:block>
+<script type="text/javascript">
+function  mainVeiwContent(flag){
+	console.log(flag);
+	if(flag==='Select_Party'){
+		$(document).ready(function(){
+			$('.Select_Party').css('display','');
+			$('.Chart').css('display','none');
+			$('.Add_Member').css('display','none');
+			$('.Member_Info').css('display','none');
+			closeNav();
+		})	
+	}else if(flag === 'Chart'){
+		$('.Select_Party').css('display','none');
+		$('.Chart').css('display','');
+		$('.Add_Member').css('display','none');
+		$('.Member_Info').css('display','none');
+		closeNav();
+	}else if(flag === 'Add_Member'){
+		$('.Select_Party').css('display','none');
+		$('.Chart').css('display','none');
+		$('.Add_Member').css('display','');
+		$('.Member_Info').css('display','none');
+		closeNav();
+	}else if(flag === 'Member_Info'){
+		$('.Select_Party').css('display','none');
+		$('.Chart').css('display','none');
+		$('.Add_Member').css('display','none');
+		$('.Member_Info').css('display','');
+		closeNav();
+	}
+	
+}
+</script>
+
+<script type="text/javascript">
+function ajaxfunction(){
+	
+	var  serial = jQuery(".selectDateTimes").serialize().split('&');
+	var  datesAndTimes = [];
+	
+	for(var i in serial){
+		var tmp = serial[i].split('=');
+		if(!tmp[1]) {
+			alert(tmp[0] + 'is null');
+		}else{
+			datesAndTimes.push(tmp[1]);
+		}
+	}
+	if(datesAndTimes.length <2){
+		alert(' times is null');
+	} 
+
+	var userSerial = jQuery(".userchecked").serialize().split('&');	
+	var checkedUser = [];
+	for(var i in userSerial){
+		checkedUser.push(userSerial[i].split('=')[0] ) ;
+	}
+
+	var test = {'datetimes' :datesAndTimes[0],
+				'times' : datesAndTimes[1],
+				'user' : checkedUser };
+	
+ 	$.ajax({
+		type:		"POST",
+		url :		"http://localhost:8080/tests",
+		data:		JSON.stringify(test),
+		contentType: "application/json; charset=UTF-8",
+		dataType:	"json",
+		success:function(){consle.log("success") }
+			
+	});
+
+}
+</script>
+
+</html>

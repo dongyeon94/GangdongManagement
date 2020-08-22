@@ -66,12 +66,15 @@ public class AddMember {
 		try 
 		{
 			String[] userInfoList = userInfo.split("/", MAX_USER_INFO_CONTENT);
-			String returnError;			
+			String returnError;		
+			
 			_nickname = userInfoList[0];
 			_age = Integer.parseInt(userInfoList[1]);
 			_location = userInfoList[2];
 			_sex = _GetGender(userInfoList[3]);
+			
 			returnError = _SaveToDb();
+			
 			if (!returnError.equals(ErrorList.ERROR_SUCCESS))
 			{
 				return returnError;
