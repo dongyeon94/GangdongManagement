@@ -29,8 +29,10 @@ public class GetParty {
 	public String Set(PartyInfo partyInfo)
 	{	
 		try 
-		{
+		{	
+			
 			DbParty partyDb = new DbParty();
+			if (partyInfo.get_id() !=null) partyDb.setId(partyInfo.get_id());
 			partyDb.setDate(partyInfo.get_date());
 			partyDb.setTimes(partyInfo.get_times());
 			partyDb.setUserPKId(partyInfo.get_userPKId());
@@ -51,8 +53,9 @@ public class GetParty {
 		c.setTime(df.parse(date));
 		c.add(Calendar.DATE, 1);
 		String newdate = df.format(c.getTime());
-		if (_partyRepo.findUserCurrentTime(userPkId, date, newdate) != null) 
-			return _partyRepo.findUserCurrentTime(userPkId, date, newdate);
+		List<DbParty> partyLi = _partyRepo.findUserCurrentTime(userPkId, date, newdate);
+		if (partyLi != null) 
+			return partyLi;
 		return null;
 	}
 	
