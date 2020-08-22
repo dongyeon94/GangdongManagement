@@ -32,7 +32,7 @@ public class GetParty {
 		{	
 			
 			DbParty partyDb = new DbParty();
-			if (partyInfo.get_id() !=null) partyDb.setId(partyInfo.get_id());
+			if (partyInfo.get_id() != null) partyDb.setId(partyInfo.get_id());
 			partyDb.setDate(partyInfo.get_date());
 			partyDb.setTimes(partyInfo.get_times());
 			partyDb.setUserPKId(partyInfo.get_userPKId());

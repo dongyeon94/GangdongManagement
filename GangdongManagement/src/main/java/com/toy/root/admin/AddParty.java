@@ -34,7 +34,6 @@ public class AddParty {
 				partInfo.set_id(_id);
 			}
 			
-			partInfo.set_date(new  Date(System.currentTimeMillis()));
 			partInfo.set_times(_times);
 			partInfo.set_userPKId(_userPKId);
 			partInfo.set_date(_date);
