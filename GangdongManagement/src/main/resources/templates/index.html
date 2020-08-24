@@ -11,9 +11,10 @@
 
 <div class="mainContent">
 
-<div  th:replace="layout.html :: selectPart" > </div> 
+<div  th:replace="layout.html :: chart" > </div>
+<div  th:replace="layout.html :: ADDPart" > </div> 
 <div  th:replace="layout.html :: addMember" > </div> 
-<div  th:replace="layout.html :: memberInfo" > </div>
+
 
 </div>
 
@@ -24,28 +25,28 @@
 <script type="text/javascript">
 function  mainVeiwContent(flag){
 	console.log(flag);
-	if(flag==='Select_Party'){
+	if(flag==='ADD_Party'){
 		$(document).ready(function(){
-			$('.Select_Party').css('display','');
+			$('.ADD_Party').css('display','');
 			$('.Chart').css('display','none');
 			$('.Add_Member').css('display','none');
 			$('.Member_Info').css('display','none');
 			closeNav();
 		})	
 	}else if(flag === 'Chart'){
-		$('.Select_Party').css('display','none');
+		$('.ADD_Party').css('display','none');
 		$('.Chart').css('display','');
 		$('.Add_Member').css('display','none');
 		$('.Member_Info').css('display','none');
 		closeNav();
 	}else if(flag === 'Add_Member'){
-		$('.Select_Party').css('display','none');
+		$('.ADD_Party').css('display','none');
 		$('.Chart').css('display','none');
 		$('.Add_Member').css('display','');
 		$('.Member_Info').css('display','none');
 		closeNav();
 	}else if(flag === 'Member_Info'){
-		$('.Select_Party').css('display','none');
+		$('.ADD_Party').css('display','none');
 		$('.Chart').css('display','none');
 		$('.Add_Member').css('display','none');
 		$('.Member_Info').css('display','');

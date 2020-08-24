@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.toy.root.db.DbParty;
 import com.toy.root.db.DbUser;
@@ -31,7 +32,8 @@ public class AdminController {
 	@Autowired
 	private AddParty addParty;
 	
-	
+	@Autowired
+	private ChartSelect chartSelet;
 	
 	@Autowired
 	private testfunction test;
@@ -39,9 +41,23 @@ public class AdminController {
 	@GetMapping("/")
 	public String mainPage(Model model) {		
 		model.addAttribute("membetList", _getMemberList.process());
-//		System.out.println(_getMemberList.process());
+		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
+		model.addAttribute("curruentdata", monthDataFormat.format(System.currentTimeMillis()));
 		return "index";
 	}
+	
+	@PostMapping("/")
+	@ResponseBody
+	public String monthChartSearch(@RequestBody String selectedDate,Model model) throws ParseException {		
+//		model.addAttribute("membetList", _getMemberList.process());
+//		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
+		model.addAttribute("curruentdata", selectedDate);
+		System.out.println(selectedDate+"-01");
+		String date = selectedDate+"-01";
+		System.out.println(chartSelet.userPartyCount(date));
+		return "redirect:/";
+	}
+	
 	
 	@PostMapping("/signup" )
 	public String signUp(@RequestParam String user) {	
