@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.toy.root.db.DbCounter;
 import com.toy.root.db.DbParty;
 import com.toy.root.db.DbUser;
 import com.toy.root.repository.UserRepository;
@@ -35,8 +36,6 @@ public class AdminController {
 	@Autowired
 	private ChartSelect chartSelet;
 	
-	@Autowired
-	private testfunction test;
 	
 	@GetMapping("/")
 	public String mainPage(Model model) {		
@@ -47,15 +46,22 @@ public class AdminController {
 	}
 	
 	@PostMapping("/")
-	@ResponseBody
-	public String monthChartSearch(@RequestBody String selectedDate,Model model) throws ParseException {		
-//		model.addAttribute("membetList", _getMemberList.process());
-//		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
-		model.addAttribute("curruentdata", selectedDate);
+	public String monthChartSearch(@RequestBody String selectedDate,Model model) throws ParseException {
+		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
+		model.addAttribute("curruentdata", selectedDate.split("=")[1]);
+		model.addAttribute("membetList", _getMemberList.process());
 		System.out.println(selectedDate+"-01");
-		String date = selectedDate+"-01";
-		System.out.println(chartSelet.userPartyCount(date));
-		return "redirect:/";
+		String date = selectedDate.split("=")[1]+"-01";
+		System.out.println(chartSelet.userPartyCounter(date));
+		List ll = chartSelet.userPartyCounter(date);
+		System.out.println(ll.get(0));
+		for (int i=0 ; i<ll.size();i++) {
+			System.out.println("ss??"+ ll.get(0));
+		}
+		System.out.println(date);
+		model.addAttribute("membetList22", chartSelet.userPartyCounter(date));
+		
+		return "index";
 	}
 	
 	

@@ -109,12 +109,14 @@
 		<div id="today-time"></div>
 	</h2>	
 	<div>
-		<input id="chartSelectDate" type="month" th:value="${curruentdata}">
-		<button type="button" onclick="searchUserPartyTimes()">검색</button>
+		<form action="/" method="post">
+			<input  id="selectedDate" name="selectedDate" type="month" th:value="${curruentdata}">
+			<!-- <input  id="selectedDate" name="selectedDate" type="month" > -->
+			<button type="submit" onclick="searchUserPartyTimes()">검색</button>
+		</form>
 	</div>
 	<canvas id="myChart"></canvas>			
 	<script type="text/javascript">
-		/* document.getElementById('chartSelectDate').value= new Date().toISOString().slice(0, 7); */
 		checkTime();
 		function checkTime()
 		{
@@ -124,20 +126,6 @@
 			var result = document.getElementById("today-time"); result.innerHTML =  currentDate +  currentTime;			 
 		}		
 		setInterval("checkTime()",1000);
-		
-		function searchUserPartyTimes(){
-			var dateLabel = $('#chartSelectDate').val(); 			
-			
-			$.ajax({
-				type:		"POST",
-				url :		"http://localhost:8080/",
-				data:		dateLabel,
-				contentType: "application/json; charset=UTF-8",
-				dataType:	"json",
-				success:function(){consle.log("success") }
-					
-				});
-		}
 	</script>
 </div>
 
@@ -214,8 +202,6 @@
 			var partyData = {'datetimes' :partyDate,
 					'times' : partyTimes,
 					'user' : userList };
-			
-			console.log(partyData);
 			
 			$.ajax({
 			type:		"POST",
@@ -302,23 +288,19 @@
 	<script type="text/javascript" th:inline="javascript">		
 		var dateLabel = '';		
 		var	ctx = document.getElementById('myChart').getContext('2d');
-		var user = [[${membetList}]];
+		var user = [[${membetList}]];	
 		var userlist=[];
 		var userparty = [];
 		/* selectedDate */
-		var tmp = [[${selectedDate}]];
-		var tmp2 = $('#chartSelectDate').val();
-		console.log(tmp);
-		console.log(tmp2);
+
+		var dateLabel = $('#chartSelectDate').val();
+
+		var user22 = [[${membetList22}]];
+		for(var u in user22){			
+			console.log(user22[u][0]);
+			console.log(user22[u][1]);
+		}
 		
-		if (tmp !=null)
-		{
-			dateLabel = tmp;
-		}
-		else
-		{
-			dateLabel = tmp2;
-		}
 		for(var u in user){
 			userlist.push(user[u]["nickName"]);
 			userparty.push(user[u]["id"]);

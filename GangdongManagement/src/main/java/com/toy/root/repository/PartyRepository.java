@@ -27,8 +27,8 @@ public interface PartyRepository extends JpaRepository<DbParty, Long>{
 	List<DbParty> findUserCurrentTime(@Param("user") int user  ,@Param("st") String start, @Param("en") String end);
 	
 	@Transactional
-	@Query(value = "SELECT user.nickname ,count(*) as count FROM GangdongGu.party, user "
-			+ "where party.userpkid = user.id and date between :st and :en  group by userpkid;" ,nativeQuery = true)
+	@Query(value = "SELECT user.nickname ,ifnull(count(party.userpkid), 0)  as count "			
+			+ "FROM user left outer join party  on user.id = party.userpkid and date between :st and :en  group by user.id;" ,nativeQuery = true)
 	List userPartyCount(@Param("st") String start, @Param("en") String end);
-				
+
 }
