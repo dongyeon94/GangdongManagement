@@ -38,29 +38,28 @@ public class AdminController {
 	
 	
 	@GetMapping("/")
-	public String mainPage(Model model) {		
-		model.addAttribute("membetList", _getMemberList.process());
+	public String mainPage(Model model) throws ParseException {				
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
+		String date = monthDataFormat.format(System.currentTimeMillis()) + "-01";
+		
+		model.addAttribute("membetList", _getMemberList.process());
 		model.addAttribute("curruentdata", monthDataFormat.format(System.currentTimeMillis()));
+		model.addAttribute("memberAttendCount", chartSelet.userPartyCounter(date));
+		
 		return "index";
 	}
 	
 	@PostMapping("/")
 	public String monthChartSearch(@RequestBody String selectedDate,Model model) throws ParseException {
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
-		model.addAttribute("curruentdata", selectedDate.split("=")[1]);
-		model.addAttribute("membetList", _getMemberList.process());
-		System.out.println(selectedDate+"-01");
 		String date = selectedDate.split("=")[1]+"-01";
-		System.out.println(chartSelet.userPartyCounter(date));
-		List ll = chartSelet.userPartyCounter(date);
-		System.out.println(ll.get(0));
-		for (int i=0 ; i<ll.size();i++) {
-			System.out.println("ss??"+ ll.get(0));
-		}
-		System.out.println(date);
-		model.addAttribute("membetList22", chartSelet.userPartyCounter(date));
 		
+		model.addAttribute("curruentdata", selectedDate.split("=")[1]);
+		model.addAttribute("membetList", _getMemberList.process());	
+		model.addAttribute("memberAttendCount", chartSelet.userPartyCounter(date));
+		
+		List ll = chartSelet.userPartyCounter(date);
+			
 		return "index";
 	}
 	
@@ -73,16 +72,10 @@ public class AdminController {
 	
 	@PostMapping("/addParty")
 	public String addParty(@RequestBody HashMap<String, Object> map) {
-		System.out.println("add party test");
-		System.out.println(map);
-		addParty.process(map);
-		
+		addParty.process(map);		
 		return "redirect:/";
 	}
-	
-	
-	
-	
+			
 	@GetMapping("/tests2")
 	public String getTest() throws ParseException {
 		int a = 7;

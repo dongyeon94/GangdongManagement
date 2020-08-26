@@ -286,42 +286,32 @@
 		}
 	</script>
 	<script type="text/javascript" th:inline="javascript">		
-		var dateLabel = '';		
+	
 		var	ctx = document.getElementById('myChart').getContext('2d');
-		var user = [[${membetList}]];	
 		var userlist=[];
-		var userparty = [];
-		/* selectedDate */
+		var userpartyAttendCount = [];
 
-		var dateLabel = $('#chartSelectDate').val();
+		var dateLabel = $('#selectedDate').val();
 
-		var user22 = [[${membetList22}]];
-		for(var u in user22){			
-			console.log(user22[u][0]);
-			console.log(user22[u][1]);
-		}
-		
-		for(var u in user){
-			userlist.push(user[u]["nickName"]);
-			userparty.push(user[u]["id"]);
-		}
+		var memberAttendCount = [[${memberAttendCount}]];
+		for(var u in memberAttendCount){			
+			userlist.push(memberAttendCount[u][0]);
+			userpartyAttendCount.push(memberAttendCount[u][1]);
+		}	
 		
 		var chart = new Chart(ctx, {
-		    // The type of chart we want to create
 		    type: 'bar',
-		    // The data for our dataset
 		    data: {
 		        labels: userlist,
 		        datasets: [{
 		            label: dateLabel+" 월",
 		            backgroundColor: 'rgb(255, 99, 132)',
 		            borderColor: 'rgb(255, 99, 132)',
-		            data: userparty
+		            data: userpartyAttendCount
 		        }]
-		    },
-		
+		    },		
 		    // Configuration options go here
-		    options: {}
+		   // options: {}
 		});
 	</script>
 </th:block>

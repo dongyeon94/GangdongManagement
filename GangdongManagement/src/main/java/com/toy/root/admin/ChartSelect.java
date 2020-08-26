@@ -18,7 +18,7 @@ public class ChartSelect {
 	@Autowired
 	private PartyRepository partyRepo;
 	
-	public List<DbCounter> userPartyCounter(String date) throws ParseException {		
+	public List userPartyCounter(String date) throws ParseException {		
 		List userCountList = partyRepo.userPartyCount(date, new DateCalculrator().datePlusOneMonth(date));		
 		return userCountList;
 	}

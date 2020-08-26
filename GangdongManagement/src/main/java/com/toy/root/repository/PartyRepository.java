@@ -28,7 +28,8 @@ public interface PartyRepository extends JpaRepository<DbParty, Long>{
 	
 	@Transactional
 	@Query(value = "SELECT user.nickname ,ifnull(count(party.userpkid), 0)  as count "			
-			+ "FROM user left outer join party  on user.id = party.userpkid and date between :st and :en  group by user.id;" ,nativeQuery = true)
+			+ "FROM user left outer join party  on user.id = party.userpkid and date between :st and :en "
+			+ "group by user.id  order by user.id;" ,nativeQuery = true)
 	List userPartyCount(@Param("st") String start, @Param("en") String end);
 
 }
