@@ -46,7 +46,7 @@ public class AdminController {
 		model.addAttribute("curruentdata", monthDataFormat.format(System.currentTimeMillis()));
 		model.addAttribute("memberAttendCount", chartSelet.userPartyCounter(date));
 		
-		return "index";
+		return "admin/index";
 	}
 	
 	@PostMapping("/")
@@ -60,7 +60,7 @@ public class AdminController {
 		
 		List ll = chartSelet.userPartyCounter(date);
 			
-		return "index";
+		return "admin/index";
 	}
 	
 	
