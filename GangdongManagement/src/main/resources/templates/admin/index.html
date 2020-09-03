@@ -94,16 +94,35 @@
 			margin-bottom: 2%;
 		}
 		.bg-b-orange{
-			background-color: orange;
+			background : linear-gradient(45deg, #fda582, #f7cf68);
+			/* top  right bottom left*/
+			padding: 5% 3% 5% 3%;
+
 		}
 		.bg-b-purple{
-			background-color: purple;
+			background: linear-gradient(45deg, #a52dd8, #e29bf1);
+			padding: 5% 3% 5% 3%;
 		}
 		.bg-b-cyan{
-			background-color: #00FFFF;
+			background : linear-gradient(45deg,#40ffed,#29b5af);
+			padding: 5% 3% 5% 3%;
 		}
-		.bg-b-black{
-			background-color: black;
+		.bg-b-gray{
+			background : linear-gradient(45deg, #708090, #7c8ea0);
+			padding: 5% 3% 5% 3%;
+		}
+		
+		.Chart{
+			margin-bottom : 5%;
+			padding : 5% 3% 5% 3%;
+		}		
+		.ADD_Party{
+			margin-bottom : 5%;
+			padding : 5% 3% 5% 3%;
+		}
+		.Add_Member{
+			margin-bottom : 5%;
+			padding : 5% 3% 5% 3%;
 		}
 		
 		@media screen and (max-height: 450px) 
@@ -153,13 +172,26 @@
 	<div class="state-overview">
 		<div class="row">
 			<div class="col-xl-3 col-md-6 col-12"> 
-				<div class="info-box bg-b-orange"> 
-					<span>이번달 벙 신 </span> 
+				<div class="info-box bg-b-orange">
+					<span id="currentMonth"></span> 
+					<span>벙신</span> 					 
 				</div> 			
 			</div>
-			<div class="col-xl-3 col-md-6 col-12"> <div class="info-box bg-b-purple"> <span>1</span> </div> </div>
-			<div class="col-xl-3 col-md-6 col-12"> <div class="info-box bg-b-cyan">   <span>1</span> </div> </div>
-			<div class="col-xl-3 col-md-6 col-12"> <div class="info-box bg-b-black">  <span>1</span> </div> </div>
+			<div class="col-xl-3 col-md-6 col-12"> 
+				<div class="info-box bg-b-purple"> 
+					<span>현재 진행중인 벙</span> 
+				</div> 
+			</div>
+			<div class="col-xl-3 col-md-6 col-12"> 
+				<div class="info-box bg-b-cyan">   
+					<span>준비중입니다.</span> 
+				</div> 
+			</div>
+			<div class="col-xl-3 col-md-6 col-12"> 
+				<div class="info-box bg-b-gray">  
+					<span>준비중입니다.</span> 
+				</div> 
+			</div>
 		</div>
 	</div>
 
@@ -189,167 +221,87 @@
 	
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
-			<div class="card card-box"> 벙 신 계 보 </div>
+			<div class="card card-box">
+				<span> 공지 </span>
+				<div>
+					<ul>
+						<li>공지 1</li>
+						<li>공지 2</li>
+						<li>공지 3</li>
+					</ul>
+				</div>
+			</div>			
 		</div>		
 	</div>
 	
 	<div class="row">
 		<div class="col-md-12 col-sm-12"> 
-			<div class="card card-box"> 공 지 </div>		
+			<div class="card card-box"> 벙 신 계 보  </div>		
 		</div>		
 	</div>
-	
-	<!-- <div th:fragment="sidenav">
-		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> &times; </a>
-			<a href="#" onclick="mainVeiwContent('Chart')"> Chart </a> 
-			<a href="#" onclick="mainVeiwContent('ADD_Party')"> ADD Party </a> 
-			<a href="#" onclick="mainVeiwContent('Add_Member')"> Add Member </a> 
-			<a href="#" onclick="mainVeiwContent('Member_Info')">Member Info</a>
-		</div>
-		<span style="font-size:30px; cursor:pointer" onclick="openNav()"> &#9776;open </span>
-	</div> -->
-	
-	<!-- 
-	<div class="Chart" th:fragment="chart" style="">	
-		<div>
-			<form action="/" method="post">
-				<input  id="selectedDate" name="selectedDate" type="month" th:value="${curruentdata}">
-				<button type="submit" onclick="searchUserPartyTimes()">검색</button>
-			</form>
-		</div>
-		<canvas id="myChart"></canvas>			
-	</div>
-	 -->
-	
-	<div class="ADD_Party" th:fragment="ADDPart" style="display:none">
-		<form class="ADDDateTimes" action="">
-			<div>
-				<input type="date" name="datetimes"> 
-				<label for="cars">Choose a times:</label> 
-				<select class="Times-Select" name="times" id="times">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select> 
-				<!-- <input type="button" onclick="ajaxfunction()" value="Search"> -->
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="card card-box">
+				<div class="ADD_Party" th:fragment="ADDPart" >
+					<form class="ADDDateTimes" action="" style="float: left;">
+						<div>
+							<input type="date" name="datetimes"> 
+							<label for="cars">Choose a times:</label> 
+							<select class="Times-Select" name="times" id="times">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select> 
+							<!-- <input type="button" onclick="ajaxfunction()" value="Search"> -->
+						</div>
+					</form>
+					<form class="userchecked" action="">
+						<div style="height: 50px;"></div>
+						<div class="checkboxContainer">				
+							<div  style="border: solid 1px black;">
+								<table class="checkboxTable">
+									<tr th:each="membetList : ${membetList}"
+										th:object="${membetList}">
+										<td>
+											<input type="checkbox" class="membercheck"
+												th:text="${membetList.nickName}" th:value="${membetList.id}"
+												th:name="memberList">
+										</td>
+									</tr>
+								</table>
+							</div>									
+						</div>
+					</form>
+					<button class="btn btn-primary" style="width:100%; margin-top:2%;" type="button" onclick="addPartyAjax()"> add party </button>			
+				</div>
 			</div>
-		</form>
-		<form class="userchecked" action="">
-			<div style="height: 50px;"></div>
-			<div class="checkboxContainer">				
-				<div  style="border: solid 1px black;">
-					<table class="checkboxTable">
-						<tr th:each="membetList : ${membetList}"
-							th:object="${membetList}">
-							<td>
-								<input type="checkbox" class="membercheck"
-									th:text="${membetList.nickName}" th:value="${membetList.id}"
-									th:name="memberList">
-							</td>
-						</tr>
-					</table>
-				</div>									
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="card card-box">
+				<div class="Add_Member">
+					<div>
+						<label for="exampleInputEmail1">ADD Member</label> 
+						<small id="emailHelp" class="form-text text-muted">We'll write text ['지코/29/성내/남'] form </small> 
+						<br/>
+						<form class="addMember" action="/signup" method="post">
+							<input type="text" name="user" style="width:90%;"> 
+							<br/><br/>
+							<button type="submit" class="btn btn-primary" style="width:90%;"> ADD Member </button>
+						</form>
+					</div>
+				</div>
 			</div>
-		</form>
-		<button class="btn btn-primary" style="width:100%; margin-top:2%;" type="button" onclick="addPartyAjax()"> add party </button>
-	
-	
-		<script type="text/javascript">
-			function addPartyAjax(){
-				var addPartyVal = jQuery(".userchecked").serialize().split('&');
-				var userList = [];
-				var partyDate = "";
-				var partyTimes = "";
-				
-				for(var i in addPartyVal){
-					userList.push( addPartyVal[i].split("=")[1] );
-				}
-								
-				var addPartyDateVal = jQuery(".ADDDateTimes").serialize().split('&');
-				for(var i in addPartyDateVal){
-					var  splitLi = addPartyDateVal[i].split('=');
-					if(splitLi[0]==='datetimes'){
-						if(splitLi.length>1){
-							partyDate =splitLi[1]; 
-						}	
-						else{
-							alert("please write times");
-						}
-					}
-					if(splitLi[0]==='times'){
-						if(splitLi.length>1){
-							partyTimes = splitLi[1];
-						}
-						else{
-							alert("please write times");
-						}
-					}
-					
-				}
-				
-				var partyData = {'datetimes' :partyDate,
-						'times' : partyTimes,
-						'user' : userList };
-				
-				$.ajax({
-				type:		"POST",
-				url :		"http://localhost:8080/addParty",
-				data:		JSON.stringify(partyData),
-				contentType: "application/json; charset=UTF-8",
-				dataType:	"json",
-				success:function(){consle.log("success") }
-					
-				});
-				
-				
-			}
-		</script>
-	</div>
-	
-		
-	<div class="Add_Member" th:fragment="addMember" style="display: none; width: 100%;">
-		<div style="width: 20%; float: left;">
-			<h2>Member List</h2>
-			<br></br>
-			<table>
-				<tr th:each="membetList : ${membetList}" th:object="${membetList}">
-					<td>
-					<span class="membercheck" th:text="${membetList.nickName}" th:name="${membetList.id}"></span>
-					</td>
-				</tr>
-			</table>
 		</div>
-		<div style="width:79%; float:left;">
-			<label for="exampleInputEmail1">ADD Member</label> 
-			<small id="emailHelp" class="form-text text-muted">We'll write text ['지코/29/성내/남'] form </small> 
-			<br/>
-			<form class="addMember" action="/signup" method="post">
-				<input type="text" name="user" style="width:90%;"> 
-				<br/><br/>
-				<button type="submit" class="btn btn-primary" style="width:90%;"> ADD Member </button>
-			</form>
-		</div>
-		
-		<script type="text/javascript">
-			function addMemberAjax(){
-				var addMemberVal = jQuery(".addMember").serialize();	
-				var MemberData = {'member' :addMemberVal};
-								
-					$.ajax({
-					type:		"POST",
-					url :		"http://localhost:8080/signup",
-					data:		JSON.stringify(MemberData),
-					contentType: "application/json; charset=UTF-8",
-					dataType:	"json",
-					success:function(){consle.log("success") }					
-				});							
-			}
-		</script>
-	</div>
+	</div>	
 </div>
+
+
 
 
 </body>
@@ -368,114 +320,142 @@
 	crossorigin="anonymous" type="text/javascript"></script>
 
 <script type="text/javascript">
-	function openNav() {
-	  document.getElementById("mySidenav").style.width = "250px";
-	}
-	
-	function closeNav() {
-	  document.getElementById("mySidenav").style.width = "0";
-	}
-</script>
-<script type="text/javascript" th:inline="javascript">		
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
 
-	var	ctx = document.getElementById('myChart').getContext('2d');
-	var userlist=[];
-	var userpartyAttendCount = [];
-
-	var dateLabel = $('#selectedDate').val();
-
-	var memberAttendCount = [[${memberAttendCount}]];
-	for(var u in memberAttendCount){			
-		userlist.push(memberAttendCount[u][0]);
-		userpartyAttendCount.push(memberAttendCount[u][1]);
-	}	
-	
-	var chart = new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	        labels: userlist,
-	        datasets: [{
-	            label: dateLabel+" 월",
-	            backgroundColor: 'rgb(255, 99, 132)',
-	            borderColor: 'rgb(255, 99, 132)',
-	            data: userpartyAttendCount
-	        }]
-	    },		
-	    // Configuration options go here
-	   // options: {}
-	});
-	
-	//pie
-    // Load google charts
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-	
-	var pieUserData = [];
-	pieUserData.push(['Task', 'Hours per Day'])
-	for(var i=0; i<userlist.length; i++){
-		pieUserData.push([userlist[i], userpartyAttendCount[i]] );
-	}
-
-	// Draw the chart and set the chart values
-	function drawChart() {
-	  var data = google.visualization.arrayToDataTable(pieUserData);
-	
-	  // Optional; add a title and set the width and height of the chart
-	  var options = {'title':dateLabel+" 월",'width':300, 'height':300};
-	
-	  // Display the chart inside the <div> element with id="piechart"
-	  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-	  chart.draw(data, options);
-	}	
-	
-
-</script>
-
-<script type="text/javascript">
-		checkTime();
-		function checkTime()
-		{
-			var d = new Date(); 
-			var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
-			var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
-			var result = document.getElementById("today-time"); result.innerHTML =  currentDate +  currentTime;			 
-		}		
-		setInterval("checkTime()",1000);
-</script>
-<script type="text/javascript">
-function  mainVeiwContent(flag){
-	console.log(flag);
-	if(flag==='ADD_Party'){
-		$(document).ready(function(){
-			$('.ADD_Party').css('display','');
-			$('.Chart').css('display','none');
-			$('.Add_Member').css('display','none');
-			$('.Member_Info').css('display','none');
-			closeNav();
-		})	
-	}else if(flag === 'Chart'){
-		$('.ADD_Party').css('display','none');
-		$('.Chart').css('display','');
-		$('.Add_Member').css('display','none');
-		$('.Member_Info').css('display','none');
-		closeNav();
-	}else if(flag === 'Add_Member'){
-		$('.ADD_Party').css('display','none');
-		$('.Chart').css('display','none');
-		$('.Add_Member').css('display','');
-		$('.Member_Info').css('display','none');
-		closeNav();
-	}else if(flag === 'Member_Info'){
-		$('.ADD_Party').css('display','none');
-		$('.Chart').css('display','none');
-		$('.Add_Member').css('display','none');
-		$('.Member_Info').css('display','');
-		closeNav();
-	}
-	
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
 }
 </script>
+<script type="text/javascript" th:inline="javascript">		
+var	ctx = document.getElementById('myChart').getContext('2d');
+var userlist=[];
+var userpartyAttendCount = [];
 
+var dateLabel = $('#selectedDate').val();
+
+var memberAttendCount = [[${memberAttendCount}]];
+for(var u in memberAttendCount){			
+	userlist.push(memberAttendCount[u][0]);
+	userpartyAttendCount.push(memberAttendCount[u][1]);
+}	
+
+var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: userlist,
+        datasets: [{
+            label: dateLabel+" 월",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: userpartyAttendCount
+        }]
+    },		
+    // Configuration options go here
+   // options: {}
+});
+
+//pie
+   // Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+var pieUserData = [];
+pieUserData.push(['Task', 'Hours per Day'])
+for(var i=0; i<userlist.length; i++){
+	pieUserData.push([userlist[i], userpartyAttendCount[i]] );
+}
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable(pieUserData);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':dateLabel+" 월",'width':300, 'height':300};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}	
+</script>
+
+<script type="text/javascript">
+checkTime();
+function checkTime()
+{
+	var d = new Date(); 
+	var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
+	var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
+	var result = document.getElementById("today-time"); 
+	result.innerHTML =  currentDate +  currentTime;			 
+}		
+setInterval("checkTime()",1000);
+document.getElementById("currentMonth").innerHTML = ( new Date().getMonth() + 1 ) + "월 ";
+</script>
+
+<script type="text/javascript">
+function addPartyAjax(){
+	var addPartyVal = jQuery(".userchecked").serialize().split('&');
+	var userList = [];
+	var partyDate = "";
+	var partyTimes = "";
+	
+	for(var i in addPartyVal){
+		userList.push( addPartyVal[i].split("=")[1] );
+	}
+					
+	var addPartyDateVal = jQuery(".ADDDateTimes").serialize().split('&');
+	for(var i in addPartyDateVal){
+		var  splitLi = addPartyDateVal[i].split('=');
+		if(splitLi[0]==='datetimes'){
+			if(splitLi.length>1){
+				partyDate =splitLi[1]; 
+			}	
+			else{
+				alert("please write times");
+			}
+		}
+		if(splitLi[0]==='times'){
+			if(splitLi.length>1){
+				partyTimes = splitLi[1];
+			}
+			else{
+				alert("please write times");
+			}
+		}					
+	}
+	
+	var partyData = {'datetimes' :partyDate,
+			'times' : partyTimes,
+			'user' : userList };
+	
+	$.ajax({
+	type:		"POST",
+	url :		"http://localhost:8080/addParty",
+	data:		JSON.stringify(partyData),
+	contentType: "application/json; charset=UTF-8",
+	dataType:	"json",
+	success:function(){consle.log("success") }
+		
+	});								
+}
+</script>
+<script type="text/javascript">
+			function addMemberAjax(){
+				var addMemberVal = jQuery(".addMember").serialize();	
+				var MemberData = {'member' :addMemberVal};
+								
+					$.ajax({
+					type:		"POST",
+					url :		"http://localhost:8080/signup",
+					data:		JSON.stringify(MemberData),
+					contentType: "application/json; charset=UTF-8",
+					dataType:	"json",
+					success:function(){consle.log("success") }					
+				});							
+			}
+</script>
 <script type="text/javascript">
 function ajaxfunction(){
 	
@@ -516,5 +496,4 @@ function ajaxfunction(){
 
 }
 </script>
-
 </html>
