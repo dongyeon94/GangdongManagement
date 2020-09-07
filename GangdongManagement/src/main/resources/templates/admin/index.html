@@ -93,6 +93,9 @@
 		.info-box{
 			margin-bottom: 2%;
 		}
+		.card-box{
+			padding-top: 5%;
+		}
 		.bg-b-orange{
 			background : linear-gradient(45deg, #fda582, #f7cf68);
 			/* top  right bottom left*/
@@ -111,7 +114,13 @@
 			background : linear-gradient(45deg, #708090, #7c8ea0);
 			padding: 5% 3% 5% 3%;
 		}
-		
+		.table-inner-style{
+			width: 100%;
+			text-align: left;			
+		}
+		.table-inner-style   td:first-child {
+			padding-left: 3%;
+		}
 		.Chart{
 			margin-bottom : 5%;
 			padding : 5% 3% 5% 3%;
@@ -122,7 +131,7 @@
 		}
 		.Add_Member{
 			margin-bottom : 5%;
-			padding : 5% 3% 5% 3%;
+			padding : 5% 3% 5% 3%;			
 		}
 		
 		.col-md-12{
@@ -130,8 +139,15 @@
 		}
 		
 		.member-info{
-			padding: 5% 3% 5% 3%;
+			padding: 5% 3% 5% 3%;			
 		}
+		
+		.member-table{
+			height: 400px;
+			overflow: scroll;
+			overflow-x:hidden; 
+		}
+		
 		@media screen and (max-height: 450px) 
 		{
 			.sidenav 
@@ -169,6 +185,7 @@
 		<div class="row">
 			<div class="col-xl-3 col-md-6 col-12"> 
 				<div class="info-box bg-b-orange">
+					<span><img id="logo" alt="logo" th:src="@{/img/king.png}"  width="40" height="40"></span>
 					<span id="currentMonth"></span> 
 					<span>벙신</span>
 				</div> 			
@@ -218,13 +235,16 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="card card-box">
-				<span> 공지 </span>
-				<div>
-					<ul>
-						<li>공지 1</li>
-						<li>공지 2</li>
-						<li>공지 3</li>
-					</ul>
+				<h2> 공지 </h2>
+				<div class="member-info table">
+					<table class="table-inner-style" style="text-align: left;">
+						<tr>
+							<td>생일자 있습니다.</td>
+						</tr>
+						<tr>
+							<td>9월 공지</td>
+						</tr>
+					</table>					
 				</div>
 			</div>			
 		</div>		
@@ -232,7 +252,26 @@
 	
 	<div class="row">
 		<div class="col-md-12 col-sm-12"> 
-			<div class="card card-box"> 벙 신 계 보  </div>		
+			<div class="card card-box">
+				<h2>
+					<img id="logo" alt="logo" th:src="@{/img/king.png}"  width="40" height="40">
+					벙 신 계 보
+					<img id="logo" alt="logo" th:src="@{/img/king.png}"  width="40" height="40">
+				</h2>
+				<div  class="member-info table">			
+					<table class="table-inner-style">
+						<tr>
+							<td>8월 </td>
+						</tr>
+						<tr>
+							<td>9월 </td>
+						</tr>
+						<tr>
+							<td>10월 </td>
+						</tr>					
+					</table>
+				</div>
+		 	</div>		
 		</div>		
 	</div>
 
@@ -279,8 +318,8 @@
 	<div class="row">
 		<div class="col-md-8 col-sm-8">
 			<div class="card card-box">
-				<div class="member-info table">
-					<table>
+				<div class="member-info table member-table">
+					<table class="table-inner-style">
 						<tr th:each="membetList : ${membetList}" th:object="${membetList}">
 							<form>
 								<input type="hidden" id="memberIdKey" th:value="${membetList.id}">							
@@ -288,7 +327,7 @@
 								<td th:text="${membetList.age}"></td>
 								<td th:text="${membetList.memo}"></td>
 								<td th:text="${membetList.joinDate}"></td>
-								<td><input type="submit" ></td>
+								<td><input type="submit" value="삭제"></td>
 							</form>
 						</tr>
 					</table>
