@@ -34,6 +34,9 @@ public class AdminController {
 	private AddParty addParty;
 	
 	@Autowired
+	private DeleteMember delMember;
+	
+	@Autowired
 	private ChartSelect chartSelet;
 	
 	
@@ -69,11 +72,17 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("/deleteUser")
+	public String deleteUser(@RequestBody HashMap<String, Object> map) {
+		delMember.process(map);
+		return "redirect:/"; 
+	}
+	
 	@PostMapping("/addParty")
 	public String addParty(@RequestBody HashMap<String, Object> map) {
 		addParty.process(map);		
 		return "redirect:/";
-	}
+	}		
 			
 	@GetMapping("/tests")
 	public String tests() throws ParseException {		

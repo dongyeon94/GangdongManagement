@@ -14,6 +14,8 @@ public interface UserRepository extends JpaRepository<DbUser, Long>{
 
 	List<DbUser> findAllByNickname(String nickname);
 
+	void deleteById(Long i);
+	
 }
 
 
