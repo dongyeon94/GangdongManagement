@@ -101,7 +101,6 @@
 			background : linear-gradient(45deg, #fda582, #f7cf68);
 			/* top  right bottom left*/
 			padding: 5% 3% 5% 3%;
-
 		}
 		.bg-b-purple{
 			background: linear-gradient(45deg, #a52dd8, #e29bf1);
@@ -134,42 +133,21 @@
 			margin-bottom : 5%;
 			padding : 5% 3% 5% 3%;			
 		}
-		
 		.col-md-12{
 			margin-bottom: 5%;
 		}
-		
 		.member-info{
 			padding: 5% 3% 5% 3%;			
 		}
-				
-		
-		 .member-table-header{
-			display: flex;
-		    flex-flow: column;
-		    height: 400px;
-		    width: 100%;
-		    text-align: center;
+		.fixed-header{
+			position: sticky;
+			top: 0;
+			background-color: #eaeef3;
 		}
-		.member-table-header thead{
-			display: table;
-			flex: 0 0 auto;
-    		width: 100%;
-    		text-align: center;
-		}	
-		.member-table-header tbody{
-			flex: 1 1 auto;
-		    display: block;
-		    width: 100%;
-		    overflow-y: scroll;
-		}
-		.member-table-header td{
-			width: 20%;
-		}		
-		
-	
 		.member-table{
 			padding : 0% 3% 0% 3%;
+			height: 300px;
+			overflow: auto;
 		}
 		
 		@media screen and (max-height: 450px) 
@@ -320,13 +298,20 @@
 					<form class="userchecked" action="">
 						<div style="height: 50px;"></div>
 						<div class="checkboxContainer">				
-							<div  style="border: solid 1px black;">
-								<table class="checkboxTable">
-									<tr th:each="membetList : ${membetList}" th:object="${membetList}">
-										<td>
-											<input type="checkbox" class="membercheck" th:text="${membetList.nickName}" th:value="${membetList.id}" th:name="memberList">
-										</td>
-									</tr>
+							<div class="table member-table">
+								<table class="checkboxTable table-inner-style member-table-header">
+									<thead>
+										<tr>
+											<th class="fixed-header">닉네임</th>
+											<th class="fixed-header">참여확인</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="membetList : ${membetList}" th:object="${membetList}">
+											<td th:text="${membetList.nickName}"></td>
+											<td><input type="checkbox" class="membercheck" th:value="${membetList.id}" th:name="memberList"></td>
+										</tr>
+									</tbody>
 								</table>
 							</div>									
 						</div>
@@ -344,22 +329,22 @@
 					<table class="table-inner-style member-table-header">
 						<thead>
 							<tr>
-								<th class="td_nick">닉네임</th>
-								<th class="td_age">나이</th>
-								<th class="td_location">지역</th>
-								<th class="td_joinDate">가입 날짜</th>
-								<th class="td_delete">삭제여부</th>
+								<th class="fixed-header">닉네임</th>
+								<th class="fixed-header">나이</th>
+								<th class="fixed-header">지역</th>
+								<th class="fixed-header">가입 날짜</th>
+								<th class="fixed-header">삭제여부</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="membetList : ${membetList}" th:object="${membetList}">							
 								<form class="deleteUser">
 									<input type="hidden" id="memberIdKey" th:value="${membetList.id}">							
-									<td class="td_nick_in" th:text="${membetList.nickName}"></td>
-									<td class="td_age_in" th:text="${membetList.age}"></td>
-									<td class="td_location_in" th:text="${membetList.memo}"></td>
-									<td class="td_joinDate_in" th:text="${membetList.joinDate}"></td>
-									<td class="td_delete_in"><input type="checkbox" class="membercheck"  th:value="${membetList.id}" th:name="memberList"></td>
+									<td th:text="${membetList.nickName}"></td>
+									<td th:text="${membetList.age}"></td>
+									<td th:text="${membetList.memo}"></td>
+									<td th:text="${membetList.joinDate}"></td>
+									<td><input type="checkbox" class="membercheck"  th:value="${membetList.id}" th:name="memberList"></td>
 								</form>
 							</tr>
 						</tbody>
