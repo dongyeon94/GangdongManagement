@@ -6,162 +6,13 @@
 <head> 
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-		crossorigin="anonymous">
-	<title>Gangdong</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<style type="text/css">
-		body 
-		{
-			font-family: "Lato", sans-serif;
-		}
-		
-		.sidenav 
-		{
-			height: 100%;
-			width: 0;
-			position: fixed;
-			z-index: 1;
-			top: 0;
-			left: 0;
-			background-color: #111;
-			overflow-x: hidden;
-			transition: 0.5s;
-			padding-top: 60px;
-		}
-		
-		.sidenav a 
-		{
-			padding: 8px 8px 8px 32px;
-			text-decoration: none;
-			font-size: 25px;
-			color: #818181;
-			display: block;
-			transition: 0.3s;
-		}
-		
-		.sidenav a:hover 
-		{
-			color: #f1f1f1;
-		}
-		
-		.sidenav .closebtn 
-		{
-			position: absolute;
-			top: 0;
-			right: 25px;
-			font-size: 36px;
-			margin-left: 50px;
-		}
-		
-		.mainContent 
-		{	
-			float: left;	
-			height: 100vh;
-			width: 80%;
-			text-align: center; 
- 			margin-bottom:10%;
-			margin-left: 10%;
-			margin-right: 10%;	 		
-		}
-		
-		.checkboxContainer 
-		{
-			margin: 0;
-		}
-		.checkboxTable
-		{
-			margin-left: 1.5%;
-			margin-right: 1.5%;
-		}
-		.head-text-bar{
-			text-align:left;
-			margin-top: 2%;
-			margin-bottom: 2%;
-		}
-		.navbar-white{
-			background-color: white;
-		}
-		.row{
-			margin-bottom: 2%;
-		}
-		.info-box{
-			margin-bottom: 2%;
-			height: 101px;
-		}
-		.card-box{
-			padding-top: 5%;
-		}
-		.bg-b-orange{
-			background : linear-gradient(45deg, #fda582, #f7cf68);
-			/* top  right bottom left*/
-			padding: 5% 3% 5% 3%;
-		}
-		.bg-b-purple{
-			background: linear-gradient(45deg, #a52dd8, #e29bf1);
-			padding: 5% 3% 5% 3%;
-		}
-		.bg-b-cyan{
-			background : linear-gradient(45deg,#40ffed,#29b5af);
-			padding: 5% 3% 5% 3%;
-		}
-		.bg-b-gray{
-			background : linear-gradient(45deg, #708090, #7c8ea0);
-			padding: 5% 3% 5% 3%;
-		}
-		.table-inner-style{
-			width: 100%;
-			text-align: left;			
-		}
-		.table-inner-style   td:first-child {
-			padding-left: 3%;
-		}
-		.Chart{
-			margin-bottom : 5%;
-			padding : 5% 3% 5% 3%;
-		}		
-		.ADD_Party{
-			margin-bottom : 5%;
-			padding : 5% 3% 5% 3%;
-		}
-		.Add_Member{
-			margin-bottom : 5%;
-			padding : 5% 3% 5% 3%;			
-		}
-		.col-md-12{
-			margin-bottom: 5%;
-		}
-		.member-info{
-			padding: 5% 3% 5% 3%;			
-		}
-		.fixed-header{
-			position: sticky;
-			top: 0;
-			background-color: #eaeef3;
-		}
-		.member-table{
-			padding : 0% 3% 0% 3%;
-			height: 300px;
-			overflow: auto;
-		}
-		
-		@media screen and (max-height: 450px) 
-		{
-			.sidenav 
-			{
-				padding-top: 15px;
-			}
-			.sidenav a 
-			{
-				font-size: 18px;
-			}
-		}
-	</style>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/animation.css}">
+	<title>Gangdong</title>
 </head>
 
 <body style="background-color: #eaeef3">
@@ -214,15 +65,18 @@
 	<div class="row">		
 		<div class="col-sm-8">
 			<div class="card card-box">			
-				<div class="Chart" th:fragment="chart" style="">	
-					<div>
-						<form action="/" method="post" style="float: left;">
-							<input  id="selectedDate" name="selectedDate" type="month" th:value="${curruentdata}">
-							<!-- <input  id="selectedDate" name="selectedDate" type="month" > -->
-							<button type="submit" onclick="searchUserPartyTimes()">검색</button>
-						</form>
+				<div class="">
+					<form action="/" method="post" style="float: left;">
+						<input  id="selectedDate" name="selectedDate" type="month" th:value="${curruentdata}">
+						<!-- <input  id="selectedDate" name="selectedDate" type="month" > -->
+						<button type="submit" onclick="searchUserPartyTimes()">검색</button>
+					</form>
+				</div>
+				<div class="chart-wrapper">
+					<div class="Chart" th:fragment="chart" style="">	
+						<canvas id="myChart" height="300" width="1200"></canvas>			
 					</div>
-					<canvas id="myChart"></canvas>			
+					<canvas id="myChartAxis" height="300" width="0"></canvas> 
 				</div>	
 			</div>
 		</div>
@@ -292,7 +146,6 @@
 								<option value="4">4</option>
 								<option value="5">5</option>
 							</select> 
-							<!-- <input type="button" onclick="ajaxfunction()" value="Search"> -->
 						</div>
 					</form>
 					<form class="userchecked" action="">
@@ -377,39 +230,78 @@
 	
 </div>
 
-
-
-
 </body>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" type="text/javascript"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous" type="text/javascript"></script>
-<script type="text/javascript">
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
+<script type="text/javascript" src="https://rawgit.com/nnnick/Chart.js/v1.0.2/Chart.min.js"></script> 
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-$( document ).ready( function() {
-/* 	$('.td_nick').css('width', $('.td_nick_in').width());
-	$('.td_age').css('width', $('.td_age_in').width());
-	$('.td_location').css('width', $('.td_location_in').width());
-	$('.td_joinDate').css('width', $('.td_joinDate_in').width());
-	$('.td_delete').css('width', $('.td_delete_in').width());
-	
-	$('.td_nick').css('height', $('.td_nick_in').height());
-	$('.td_age').css('height', $('.td_age_in').height());
-	$('.td_location').css('height', $('.td_location_in').height());
-	$('.td_joinDate').css('height', $('.td_joinDate_in').height());
-	$('.td_delete').css('height', $('.td_delete_in').height()); */
-});
-</script>
+<script type="text/javascript" th:src="@{/js/timer.js}"></script>
+<script type="text/javascript" th:src="@{/js/addParty.js}"></script>
+<script type="text/javascript" th:src="@{/js/addMember.js}"></script>
+<script type="text/javascript" th:src="@{/js/deleteMember.js}"></script>
 
 <script type="text/javascript" th:inline="javascript">
+var userlist=[];
+var userpartyAttendCount = [];
+
+var dateLabel = $('#selectedDate').val();
+
+var memberAttendCount = [[${memberAttendCount}]];
+for(var u in memberAttendCount){			
+	userlist.push(memberAttendCount[u][0]);
+	userpartyAttendCount.push(memberAttendCount[u][1]);
+}	
+
+window.onload=function(){
+	
+	/* 
+	var chart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: userlist,
+	        datasets: [{
+	            label: dateLabel+" 월",
+	            backgroundColor: 'rgb(255, 99, 132)',
+	            borderColor: 'rgb(255, 99, 132)',
+	            data: userpartyAttendCount
+	        }]
+	    },
+	});
+	 */
+	
+	var	ctx = document.getElementById('myChart').getContext('2d');
+	
+	
+	 
+	var data = {
+        labels: userlist,
+        datasets: [{
+            label: dateLabel+" 월",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: userpartyAttendCount
+        }]
+    };
+	
+	
+	new Chart(ctx).Bar(data, {
+        onAnimationComplete: function () {
+            var sourceCanvas = this.chart.ctx.canvas;
+            var copyWidth = this.scale.xScalePaddingLeft - 5;
+            var copyHeight = this.scale.endPoint -10;
+            var targetCtx = document.getElementById("myChartAxis").getContext("2d");
+            targetCtx.canvas.width = copyWidth;
+            targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+        }
+    });
+	
+}
+
+/* 
+
 var	ctx = document.getElementById('myChart').getContext('2d');
 var userlist=[];
 var userpartyAttendCount = [];
@@ -432,10 +324,11 @@ var chart = new Chart(ctx, {
             borderColor: 'rgb(255, 99, 132)',
             data: userpartyAttendCount
         }]
-    },		
-    // Configuration options go here
-   // options: {}
+    },
 });
+
+ */
+
 
 //pie
    // Load google charts
@@ -459,172 +352,8 @@ function drawChart() {
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
   chart.draw(data, options);
 }	
+
 </script>
 
-<script type="text/javascript">
-checkTime();
-function checkTime()
-{
-	var d = new Date(); 
-	var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
-	var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
-	var result = document.getElementById("today-time"); 
-	result.innerHTML =  currentDate +  currentTime;			 
-}		
-setInterval("checkTime()",1000);
-document.getElementById("currentMonth").innerHTML = ( new Date().getMonth() + 1 ) + "월 ";
-</script>
 
-<script type="text/javascript">
-function addPartyConfirm(){	
-	var addPartyVal = jQuery(".userchecked").serialize().split('&');
-	var userList = [];
-	var partyDate = "";
-	var partyTimes = "";
-	
-	for(var i in addPartyVal){
-		userList.push( addPartyVal[i].split("=")[1] );
-	}
-					
-	var addPartyDateVal = jQuery(".ADDDateTimes").serialize().split('&');
-	for(var i in addPartyDateVal){
-		var  splitLi = addPartyDateVal[i].split('=');
-		if(splitLi[0]==='datetimes'){
-			if(splitLi.length>1){
-				partyDate =splitLi[1];
-				console.log(partyDate);
-			}	
-			else{
-				alert("please write date");
-			}
-		}
-		if(splitLi[0]==='times'){
-			if(splitLi.length>1){
-				partyTimes = splitLi[1];
-				console.log(partyTimes);
-			}
-			else{
-				alert("please write times");				
-			}
-		}					
-	}
-	
-	var partyData = {'datetimes' :partyDate,
-			'times' : partyTimes,
-			'user' : userList };
-	console.log(userList);
-	console.log(userList.length);
-	if(partyDate.length > 1 &&  userList.length >1)
-	{
-		$.ajax({
-			type:		"POST",
-			url :		"http://localhost:8080/addParty",
-			data:		JSON.stringify(partyData),
-			contentType: "application/json; charset=UTF-8",
-			dataType:	"json",
-			success:function(){consle.log("success") }
-				
-			});			
-		return true;	
-	}
-	else
-	{
-		return false;
-	}	
-}
-
-function addPartyAjax(){
-	if(confirm("정말 등록하시겠습니까 ?") == true){
-        
-		var confirmFlag = addPartyConfirm();
-        if (confirmFlag==true)
-        {
-        	alert("등록되었습니다");
-        	location.reload(true);
-        }
-        else
-        {
-        	alert("등록에 실패하였습니다.");
-            location.reload(true);
-            return true;	
-        }      
-    }
-    else{
-    	alert("취소 되었습니다");
-    	location.reload(true);
-        return false;
-    }						
-}
-</script>
-
-<script type="text/javascript">
-function addMemberConfirm(){
-	var addMemberVal = jQuery(".addMember").serialize();	
-	var MemberData = {'member' :addMemberVal};
-					
-		$.ajax({
-		type:		"POST",
-		url :		"http://localhost:8080/signup",
-		data:		JSON.stringify(MemberData),
-		contentType: "application/json; charset=UTF-8",
-		dataType:	"json",
-		success:function(){consle.log("success") }					
-	});		
-}
-
-function addMemberAjax(){
-		
-	if(confirm("정말 등록하시겠습니까 ?") == true){
-		addMemberConfirm();
-        alert("등록되었습니다");
-        location.reload(true);
-        return true;
-    }
-    else{
-    	alert("취소 되었습니다");
-    	location.reload(true);
-        return false;
-    }
-
-}
-</script>
-
-<script type="text/javascript">
-function deleteMemberConfirm(){
-	var deleteMemberVal = jQuery(".deleteUser").serialize().split('&');
-	var userList = [];
-	console.log(deleteMemberVal);
-	
-	for(var i in deleteMemberVal){
-		userList.push( deleteMemberVal[i].split("=")[1] );
-	}
-	
-	console.log(userList);
-	var MemberData = {'member' :userList};
-		$.ajax({
-		type:		"POST",
-		url :		"http://localhost:8080/deleteUser",
-		data:		JSON.stringify(MemberData),
-		contentType: "application/json; charset=UTF-8",
-		dataType:	"json",
-		success:function(){consle.log("success") }					
-	});		
-}
-
-function deleteMemberAjax(){
-		
-	if(confirm("정말 삭제하시겠습니까 ?\n   ") == true){
-        alert("삭제되었습니다");
-        deleteMemberConfirm();
-        location.reload(true);
-        return true;
-    }
-    else{
-    	alert("취소 되었습니다");
-    	location.reload(true);
-        return false;
-    }
-
-}
-</script>
 </html>

@@ -1,4 +1,4 @@
-package com.toy.root.admin;
+package com.toy.root.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

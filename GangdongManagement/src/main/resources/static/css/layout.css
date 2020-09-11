@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+body {
+	font-family: "Lato", sans-serif;
+}
+
+
+.mainContent {	
+	float: left;	
+	height: 100vh;
+	width: 80%;
+	text-align: center; 
+		margin-bottom:10%;
+	margin-left: 10%;
+	margin-right: 10%;	 		
+}
+.head-text-bar {
+	text-align:left;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+.navbar-white {
+	background-color: white;
+}
+.chart-wrapper {
+	position: relative;
+}
+chart-wrapper > canvas{
+	position: absolute;
+	left: 0;
+	top: 0;
+	pointer-events: none;
+}
+	.Chart {
+		margin:auto;
+		width: 600px;
+	   	overflow-x: scroll;
+	}
+.ADD_Party {
+	margin-bottom : 5%;
+	padding : 5% 3% 5% 3%;
+}
+.Add_Member {
+	margin-bottom : 5%;
+	padding : 5% 3% 5% 3%;			
+}
+
+
+.row {
+	margin-bottom: 2%;
+}
+.col-md-12 {
+	margin-bottom: 5%;
+}
+.info-box {
+	margin-bottom: 2%;
+	height: 101px;
+}
+.card-box {
+	padding-top: 5%;
+}
+.bg-b-orange {
+	background : linear-gradient(45deg, #fda582, #f7cf68);
+	/* top  right bottom left*/
+	padding: 5% 3% 5% 3%;
+}
+.bg-b-purple {
+	background: linear-gradient(45deg, #a52dd8, #e29bf1);
+	padding: 5% 3% 5% 3%;
+}
+.bg-b-cyan {
+	background : linear-gradient(45deg,#40ffed,#29b5af);
+	padding: 5% 3% 5% 3%;
+}
+.bg-b-gray {
+	background : linear-gradient(45deg, #708090, #7c8ea0);
+	padding: 5% 3% 5% 3%;
+}
+
+
+
+.checkboxContainer {
+	margin: 0;
+}
+.checkboxTable {
+	margin-left: 1.5%;
+	margin-right: 1.5%;
+}
+.fixed-header {
+	position: sticky;
+	top: 0;
+	background-color: #eaeef3;
+}
+.table-inner-style {
+	width: 100%;
+	text-align: left;			
+}
+	.table-inner-style td:first-child {
+		padding-left: 3%;
+	}
+.member-info {
+	padding: 5% 3% 5% 3%;			
+}
+.member-table {
+	padding : 0% 3% 0% 3%;
+	height: 300px;
+	overflow-y: scroll;
+}
+
+	
