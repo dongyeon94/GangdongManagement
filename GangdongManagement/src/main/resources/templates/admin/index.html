@@ -92,6 +92,7 @@
 		}
 		.info-box{
 			margin-bottom: 2%;
+			height: 101px;
 		}
 		.card-box{
 			padding-top: 5%;
@@ -141,11 +142,34 @@
 		.member-info{
 			padding: 5% 3% 5% 3%;			
 		}
+				
 		
+		 .member-table-header{
+			display: flex;
+		    flex-flow: column;
+		    height: 400px;
+		    width: 100%;
+		    text-align: center;
+		}
+		.member-table-header thead{
+			display: table;
+			flex: 0 0 auto;
+    		width: 100%;
+    		text-align: center;
+		}	
+		.member-table-header tbody{
+			flex: 1 1 auto;
+		    display: block;
+		    width: 100%;
+		    overflow-y: scroll;
+		}
+		.member-table-header td{
+			width: 20%;
+		}		
+		
+	
 		.member-table{
-			height: 400px;
-			overflow: scroll;
-			overflow-x:hidden; 
+			padding : 0% 3% 0% 3%;
 		}
 		
 		@media screen and (max-height: 450px) 
@@ -316,25 +340,29 @@
 	<div class="row">
 		<div class="col-md-8 col-sm-8">
 			<div class="card card-box">
-				<div class="member-info table member-table">
-					<table class="table-inner-style">
-						<tr>
-							<td>닉네임</td>
-							<td>나이</td>
-							<td>지역</td>
-							<td>가입 날짜</td>
-							<td>삭제여부</td>
-						</tr>
-						<tr th:each="membetList : ${membetList}" th:object="${membetList}">							
-							<form class="deleteUser">
-								<input type="hidden" id="memberIdKey" th:value="${membetList.id}">							
-								<td th:text="${membetList.nickName}"></td>
-								<td th:text="${membetList.age}"></td>
-								<td th:text="${membetList.memo}"></td>
-								<td th:text="${membetList.joinDate}"></td>
-								<td><input type="checkbox" class="membercheck"  th:value="${membetList.id}" th:name="memberList"></td>
-							</form>
-						</tr>
+				<div class="member-info table member-table">					
+					<table class="table-inner-style member-table-header">
+						<thead>
+							<tr>
+								<th class="td_nick">닉네임</th>
+								<th class="td_age">나이</th>
+								<th class="td_location">지역</th>
+								<th class="td_joinDate">가입 날짜</th>
+								<th class="td_delete">삭제여부</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="membetList : ${membetList}" th:object="${membetList}">							
+								<form class="deleteUser">
+									<input type="hidden" id="memberIdKey" th:value="${membetList.id}">							
+									<td class="td_nick_in" th:text="${membetList.nickName}"></td>
+									<td class="td_age_in" th:text="${membetList.age}"></td>
+									<td class="td_location_in" th:text="${membetList.memo}"></td>
+									<td class="td_joinDate_in" th:text="${membetList.joinDate}"></td>
+									<td class="td_delete_in"><input type="checkbox" class="membercheck"  th:value="${membetList.id}" th:name="memberList"></td>
+								</form>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 				<button class="btn btn-primary" type="button" style="margin: 5% 3% 5% 3%;" onclick="deleteMemberAjax()">삭제 </button>	
@@ -381,6 +409,19 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+$( document ).ready( function() {
+/* 	$('.td_nick').css('width', $('.td_nick_in').width());
+	$('.td_age').css('width', $('.td_age_in').width());
+	$('.td_location').css('width', $('.td_location_in').width());
+	$('.td_joinDate').css('width', $('.td_joinDate_in').width());
+	$('.td_delete').css('width', $('.td_delete_in').width());
+	
+	$('.td_nick').css('height', $('.td_nick_in').height());
+	$('.td_age').css('height', $('.td_age_in').height());
+	$('.td_location').css('height', $('.td_location_in').height());
+	$('.td_joinDate').css('height', $('.td_joinDate_in').height());
+	$('.td_delete').css('height', $('.td_delete_in').height()); */
+});
 </script>
 
 <script type="text/javascript" th:inline="javascript">
