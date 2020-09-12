@@ -15,7 +15,7 @@ public class GetMemberList {
 	private UserRepository userrepo;
 	
 	public List<DbUser> process(){
-		List<DbUser> li = userrepo.findAll();
+		List<DbUser> li = userrepo.findAllbyAlive();
 		return li;
 	}
 	

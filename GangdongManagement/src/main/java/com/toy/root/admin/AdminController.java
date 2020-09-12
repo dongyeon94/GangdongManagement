@@ -75,6 +75,7 @@ public class AdminController {
 	@PostMapping("/deleteUser")
 	public String deleteUser(@RequestBody HashMap<String, Object> map) {
 		delMember.process(map);
+		System.out.println(map);
 		return "redirect:/"; 
 	}
 	

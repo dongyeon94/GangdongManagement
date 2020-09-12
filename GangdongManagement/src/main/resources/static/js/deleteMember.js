@@ -2,12 +2,10 @@
 function deleteMemberConfirm(){
 	var deleteMemberVal = jQuery(".deleteUser").serialize().split('&');
 	var userList = [];
-	console.log(deleteMemberVal);
 	
 	for(var i in deleteMemberVal){
 		userList.push( deleteMemberVal[i].split("=")[1] );
 	}
-	
 	console.log(userList);
 	var MemberData = {'member' :userList};
 		$.ajax({
