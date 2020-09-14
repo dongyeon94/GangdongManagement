@@ -1,4 +1,4 @@
-package com.toy.root.admin;
+package com.toy.root.process;
 
 public class ErrorList {
 	public static final String ERROR_ADD_MEMBER_INPUT = "404";

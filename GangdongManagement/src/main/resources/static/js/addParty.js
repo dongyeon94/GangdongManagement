@@ -9,9 +9,11 @@ function addPartyConfirm()
 	var partyData = {'datetimes' :partyDate,
 			'times' : partyTimes,
 			'user' : userList };
-
-	if(partyDate.length > 1 &&  userList.length >1)
+	
+	console.log(partyData);
+	if(partyDate.length >= 1 &&  userList.length >= 1)
 	{
+		console.log('s');
 		$.ajax
         ({
 			type:		"POST",
@@ -84,6 +86,7 @@ function addPartyAjax()
     }
 
     alert(msg);
-    location.reload(true);
+    // location.reload(true);
+    
     return bResult;
 }

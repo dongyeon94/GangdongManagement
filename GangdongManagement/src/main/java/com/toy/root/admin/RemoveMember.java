@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.toy.root.admin.GetMember;
 import com.toy.root.admin.MemberInfo;
+import com.toy.root.process.ErrorList;
 
 @Service
 public class RemoveMember {

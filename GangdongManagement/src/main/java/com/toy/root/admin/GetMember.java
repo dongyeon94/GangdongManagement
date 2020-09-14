@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.toy.root.db.DbUser;
+import com.toy.root.process.ErrorList;
 import com.toy.root.repository.UserRepository;
 import com.toy.root.admin.MemberInfo;
-
-import com.toy.root.admin.ErrorList;
 @Service
 public class GetMember {
 	

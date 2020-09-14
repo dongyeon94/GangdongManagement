@@ -81,6 +81,7 @@ public class AdminController {
 	
 	@PostMapping("/addParty")
 	public String addParty(@RequestBody HashMap<String, Object> map) {
+		System.out.println(map);
 		addParty.process(map);		
 		return "redirect:/";
 	}		

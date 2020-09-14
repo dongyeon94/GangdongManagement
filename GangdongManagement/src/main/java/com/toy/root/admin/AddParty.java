@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.deser.ValueInstantiator.Gettable;
 import com.mysql.cj.result.Field;
 import com.toy.root.db.DbParty;
 import com.toy.root.process.BitConvert;
+import com.toy.root.process.ErrorList;
 
 @Service
 public class AddParty {
