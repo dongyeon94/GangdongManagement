@@ -86,7 +86,7 @@ function addPartyAjax()
     }
 
     alert(msg);
-    // location.reload(true);
+    location.reload(true);
     
     return bResult;
 }
