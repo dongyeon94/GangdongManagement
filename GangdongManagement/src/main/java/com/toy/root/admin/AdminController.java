@@ -2,6 +2,7 @@ package com.toy.root.admin;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.toy.root.db.DbCounter;
 import com.toy.root.db.DbParty;
 import com.toy.root.db.DbUser;
+import com.toy.root.process.BestPartyJoinUser;
 import com.toy.root.repository.UserRepository;
 
 @Controller
@@ -38,6 +40,9 @@ public class AdminController {
 	
 	@Autowired
 	private ChartSelect chartSelet;
+	
+	@Autowired
+	private BestPartyJoinUser bestParty;
 	
 	
 	@GetMapping("/")
@@ -87,7 +92,14 @@ public class AdminController {
 	}		
 			
 	@GetMapping("/tests")
-	public String tests() throws ParseException {		
+	public String tests() throws ParseException {
+//		System.out.println(bestParty.firstPartyMonth());
+//		System.out.println(bestParty.lastPartyMonth());
+//		System.out.println(bestParty.localDateToString(bestParty.lastPartyMonth()));
+//		System.out.println(bestParty.lastDaytoCurrentMonth(bestParty.localDateToString(bestParty.lastPartyMonth())));
+		bestParty.bestPartyJoinUser(bestParty.timestampToLocalDate(bestParty.firstPartyMonth()), 
+				bestParty.timestampToLocalDate(bestParty.lastPartyMonth()));
+		
 		return "redirect:/";
 	}
 	

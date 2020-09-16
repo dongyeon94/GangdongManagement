@@ -1,6 +1,7 @@
 package com.toy.root.repository;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,11 +21,11 @@ public interface PartyRepository extends JpaRepository<DbParty, Long>{
 	
 	@Transactional
 	@Query(value = "SELECT date FROM party order by date limit 1;" ,nativeQuery = true)
-	public LocalDate startPartyMonth();
+	public Timestamp startPartyMonth();
 	
 	@Transactional
 	@Query(value = "SELECT date FROM party order by date desc limit 1;" ,nativeQuery = true)
-	public LocalDate lastPartyMonth();
+	public Timestamp lastPartyMonth();
 	
 	@Transactional
 	@Query(value = "SELECT user.nickname , count(party.userpkid) " +

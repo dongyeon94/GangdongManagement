@@ -1,5 +1,8 @@
 package com.toy.root.process;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -22,27 +25,45 @@ public class BestPartyJoinUser {
 	
 	public List bestPartyJoinUser(LocalDate startMonth, LocalDate lastMonth) 
 	{
-		List userList = (List) new ArrayList();
-		for(LocalDate i = startMonth; startMonth.isBefore(lastMonth); startMonth.plusMonths(1)) 
-		{
-//			repo.countdate(startmonth)
+		List userList = null;
+
+		
+		String start = localDateToString(startMonth)+"-01";
+		String end = localDateToString(lastMonth)+"-01";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate datestart = LocalDate.parse(start, formatter);
+        LocalDate dateend = LocalDate.parse(end, formatter);
+       
+		for(LocalDate i = datestart; i.isBefore(dateend) || i.isEqual(dateend); i = i.plusMonths(1)) {
+			System.out.println(i);
 		}
+		
 		return userList;			
 	}
 	
-	public LocalDate firstPartyMonth() 
+	public Timestamp firstPartyMonth() 
 	{
 		return partyRepo.startPartyMonth();
 	}
 	
-	public LocalDate lastPartyMonth() 
+	public Timestamp lastPartyMonth() 
 	{
 		return partyRepo.lastPartyMonth();
 	}
 	
+	public LocalDate timestampToLocalDate(Timestamp currentDate) {
+		return currentDate.toLocalDateTime().toLocalDate();
+	}
+	
+	public String TimestampToString(Timestamp currentDate) 
+	{	
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return dateFormat.format(currentDate);
+	}
+	
 	public String localDateToString(LocalDate currentDate) 
-	{
-		return currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	{	
+		return currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM"));
 	}
 	
 	public LocalDate lastDaytoCurrentMonth(String currentDate) 
