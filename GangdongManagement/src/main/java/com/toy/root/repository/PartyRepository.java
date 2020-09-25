@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +14,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.toy.root.db.DbBestJoinCounter;
 import com.toy.root.db.DbParty;
+import com.toy.root.db.DbUser;
 
 @Repository
 public interface PartyRepository extends JpaRepository<DbParty, Long>{
@@ -26,19 +29,6 @@ public interface PartyRepository extends JpaRepository<DbParty, Long>{
 	@Transactional
 	@Query(value = "SELECT date FROM party order by date desc limit 1;" ,nativeQuery = true)
 	public Timestamp lastPartyMonth();
-	
-	@Transactional
-	@Query(value = "SELECT user.nickname , count(party.userpkid) " +
-			"FROM user left outer join party " +
-			"on user.id = party.userpkid and date between :st and :en " +
-			"WHERE alive=1 group by user.id " +
-			"having count(party.userpkid)  >= ( " +
-			"	SELECT count(*) FROM GangdongGu.party " +
-			"	where date between :st and :en " +
-			"	group by userpkid " +
-			"	order by userpkid " +
-			"	limit 1 );" ,nativeQuery = true)
-	public List bestPartyJoinUser(@Param("st") String st, @Param("en") String en);
 	
 	@Transactional
 	@Query(value = "SELECT * FROM GangdongGu.party where "

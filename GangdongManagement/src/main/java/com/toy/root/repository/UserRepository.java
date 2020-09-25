@@ -29,6 +29,20 @@ public interface UserRepository extends JpaRepository<DbUser, Long>{
 	@Query(value = "SELECT * FROM user WHERE alive=1;" , nativeQuery = true)
 	List<DbUser> findAllbyAlive();
 	
+	
+	@Transactional
+	@Query(value = "SELECT *  " +
+			"FROM user left outer join party " +
+			"on user.id = party.userpkid and date between :st and :en " +
+			"WHERE alive=1 group by user.id " +
+			"having count(party.userpkid)  >= ( " +
+			"	SELECT count(*) FROM GangdongGu.party " +
+			"	where date between :st and :en " +
+			"	group by userpkid " +
+			"	order by userpkid " +
+			"	limit 1 );" ,nativeQuery = true)
+	public List<DbUser> bestPartyJoinUser(@Param("st") String st, @Param("en") String en);
+	
 }
 
 

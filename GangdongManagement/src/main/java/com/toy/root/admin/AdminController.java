@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,10 +50,12 @@ public class AdminController {
 	public String mainPage(Model model) throws ParseException {				
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
 		String date = monthDataFormat.format(System.currentTimeMillis()) + "-01";
+		List<Map<String,Object>> BestUser = bestParty.bestPartyJoinUser(bestParty.timestampToLocalDate(bestParty.firstPartyMonth()), bestParty.timestampToLocalDate(bestParty.lastPartyMonth()));
 		
 		model.addAttribute("membetList", _getMemberList.process());
 		model.addAttribute("curruentdata", monthDataFormat.format(System.currentTimeMillis()));
 		model.addAttribute("memberAttendCount", chartSelet.userPartyCounter(date));
+		model.addAttribute("BestUser", BestUser);
 		
 		return "admin/index";
 	}
@@ -61,12 +64,12 @@ public class AdminController {
 	public String monthChartSearch(@RequestBody String selectedDate,Model model) throws ParseException {
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
 		String date = selectedDate.split("=")[1]+"-01";
+		List<Map<String,Object>> BestUser = bestParty.bestPartyJoinUser(bestParty.timestampToLocalDate(bestParty.firstPartyMonth()), bestParty.timestampToLocalDate(bestParty.lastPartyMonth()));
 		
 		model.addAttribute("curruentdata", selectedDate.split("=")[1]);
 		model.addAttribute("membetList", _getMemberList.process());	
 		model.addAttribute("memberAttendCount", chartSelet.userPartyCounter(date));
-		
-		List ll = chartSelet.userPartyCounter(date);
+		model.addAttribute("BestUser", BestUser);
 			
 		return "admin/index";
 	}
@@ -93,12 +96,9 @@ public class AdminController {
 			
 	@GetMapping("/tests")
 	public String tests() throws ParseException {
-//		System.out.println(bestParty.firstPartyMonth());
-//		System.out.println(bestParty.lastPartyMonth());
-//		System.out.println(bestParty.localDateToString(bestParty.lastPartyMonth()));
-//		System.out.println(bestParty.lastDaytoCurrentMonth(bestParty.localDateToString(bestParty.lastPartyMonth())));
-		bestParty.bestPartyJoinUser(bestParty.timestampToLocalDate(bestParty.firstPartyMonth()), 
-				bestParty.timestampToLocalDate(bestParty.lastPartyMonth()));
+		List<Map<String,Object>> test = bestParty.bestPartyJoinUser(bestParty.timestampToLocalDate(bestParty.firstPartyMonth()), bestParty.timestampToLocalDate(bestParty.lastPartyMonth()));
+		
+		System.out.println(test.get(0));
 		
 		return "redirect:/";
 	}
