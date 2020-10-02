@@ -116,113 +116,24 @@
 				</h2>
 				<div  class="member-info table">			
 					<table class="table-inner-style">
-						<tr th:each="bestUser, i : ${BestUser}">
-							<td th:text="${bestUser.date}"></td>
-							<td th:text="${bestUser.nickname}"></td>
-						</tr>
+						<thead>
+							<tr>
+								<th>날짜</th>
+								<th>인원</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bestUser, i : ${BestUser}">
+								<td th:text="${bestUser.date}"></td>
+								<td th:text="${bestUser.nickname}"></td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 		 	</div>		
 		</div>		
 	</div>
 
-
-<!-- 
-	<div class="row">
-		<div class="col-md-12 col-sm-12">
-			<div class="card card-box">
-				<div class="ADD_Party" th:fragment="ADDPart" >
-					<form class="ADDDateTimes" action="" style="float: left;">
-						<div>
-							<input type="date" name="datetimes"> 
-							<label for="cars">Choose a times:</label> 
-							<select class="Times-Select" name="times" id="times">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select> 
-						</div>
-					</form>
-					<form class="userchecked" action="">
-						<div style="height: 50px;"></div>
-						<div class="checkboxContainer">				
-							<div class="table member-table">
-								<table class="checkboxTable table-inner-style member-table-header">
-									<thead>
-										<tr>
-											<th class="fixed-header">닉네임</th>
-											<th class="fixed-header">참여확인</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="membetList : ${membetList}" th:object="${membetList}">
-											<td th:text="${membetList.nickName}"></td>
-											<td><input type="checkbox" class="membercheck" th:value="${membetList.id}" th:name="memberList"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>									
-						</div>
-					</form>
-					<button class="btn btn-primary" style="width:100%; margin-top:2%;" type="button" onclick="addPartyAjax()"> add party </button>			
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-8 col-sm-8">
-			<div class="card card-box">
-				<div class="member-info table member-table">					
-					<table class="table-inner-style member-table-header">
-						<thead>
-							<tr>
-								<th class="fixed-header">닉네임</th>
-								<th class="fixed-header">나이</th>
-								<th class="fixed-header">지역</th>
-								<th class="fixed-header">가입 날짜</th>
-								<th class="fixed-header">삭제여부</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="membetList : ${membetList}" th:object="${membetList}">							
-								<form class="deleteUser">
-									<input type="hidden" id="memberIdKey" th:value="${membetList.id}">							
-									<td th:text="${membetList.nickName}"></td>
-									<td th:text="${membetList.age}"></td>
-									<td th:text="${membetList.memo}"></td>
-									<td th:text="${membetList.joinDate}"></td>
-									<td><input type="checkbox" class="membercheck"  th:value="${membetList.id}" th:name="memberList"></td>
-								</form>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<button class="btn btn-primary" type="button" style="margin: 5% 3% 5% 3%;" onclick="deleteMemberAjax()">삭제 </button>	
-			</div>
-		</div>
-		
-		<div class="col-md-4 col-sm-12 col-12">
-			<div class="card card-box">
-				<div class="Add_Member">
-					<div>
-						<label for="exampleInputEmail1">ADD Member</label> 
-						<small id="emailHelp" class="form-text text-muted">We'll write text ['지코/29/성내/남'] form </small> 
-						<br/>
-						<form class="addMember" action="/signup" method="post" onsubmit="return addMemberAjax()">
-							<input type="text" name="user" style="width:90%;"> 
-							<br/><br/>
-							<button type="submit" class="btn btn-primary" style="width:90%;"> ADD Member </button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>	
-	
-	 -->
 	
 </div>
 

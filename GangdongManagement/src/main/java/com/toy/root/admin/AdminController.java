@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,6 +26,7 @@ import com.toy.root.process.BestPartyJoinUser;
 import com.toy.root.repository.UserRepository;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
@@ -46,7 +48,7 @@ public class AdminController {
 	private BestPartyJoinUser bestParty;
 	
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public String mainPage(Model model) throws ParseException {				
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
 		String date = monthDataFormat.format(System.currentTimeMillis()) + "-01";
@@ -60,7 +62,7 @@ public class AdminController {
 		return "admin/index";
 	}
 	
-	@PostMapping("/")
+	@PostMapping("")
 	public String monthChartSearch(@RequestBody String selectedDate,Model model) throws ParseException {
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
 		String date = selectedDate.split("=")[1]+"-01";
@@ -100,7 +102,7 @@ public class AdminController {
 		
 		System.out.println(test.get(0));
 		
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
 }
