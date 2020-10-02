@@ -43,7 +43,7 @@ public class UserController {
 	private BestPartyJoinUser bestParty;
 	
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public String mainPage(Model model) throws ParseException {				
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
 		String date = monthDataFormat.format(System.currentTimeMillis()) + "-01";
@@ -57,7 +57,7 @@ public class UserController {
 		return "user/index";
 	}
 	
-	@PostMapping("/")
+	@PostMapping("")
 	public String monthChartSearch(@RequestBody String selectedDate,Model model) throws ParseException {
 		SimpleDateFormat monthDataFormat = new SimpleDateFormat("yyyy-MM");
 		String date = selectedDate.split("=")[1]+"-01";
