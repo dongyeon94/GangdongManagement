@@ -14,7 +14,7 @@ function deleteMemberConfirm()
     $.ajax
     ({
 		type:		"POST",
-		url :		"http://localhost:8080/deleteUser",
+		url :		"http://localhost:8080/admin/deleteUser",
 		data:		JSON.stringify(MemberData),
 		contentType: "application/json; charset=UTF-8",
 		dataType:	"json",

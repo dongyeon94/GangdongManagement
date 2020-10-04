@@ -79,21 +79,21 @@ public class AdminController {
 	@PostMapping("/signup" )
 	public String signUp(@RequestParam String user) {	
 		addmember.process(user);
-		return "redirect:/";
+		return "redirect:/admin/";
 	}
 	
 	@PostMapping("/deleteUser")
 	public String deleteUser(@RequestBody HashMap<String, Object> map) {
 		delMember.process(map);
 		System.out.println(map);
-		return "redirect:/"; 
+		return "redirect:/admin/"; 
 	}
 	
 	@PostMapping("/addParty")
 	public String addParty(@RequestBody HashMap<String, Object> map) {
 		System.out.println(map);
 		addParty.process(map);		
-		return "redirect:/";
+		return "redirect:/admin/";
 	}		
 			
 	@GetMapping("/tests")
@@ -102,7 +102,7 @@ public class AdminController {
 		
 		System.out.println(test.get(0));
 		
-		return "redirect:/admin";
+		return "redirect:/admin/";
 	}
 	
 }

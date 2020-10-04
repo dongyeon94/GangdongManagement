@@ -39,7 +39,7 @@ public interface UserRepository extends JpaRepository<DbUser, Long>{
 			"	SELECT count(*) FROM GangdongGu.party " +
 			"	where date between :st and :en " +
 			"	group by userpkid " +
-			"	order by userpkid " +
+			"	order by count(*) desc " +
 			"	limit 1 );" ,nativeQuery = true)
 	public List<DbUser> bestPartyJoinUser(@Param("st") String st, @Param("en") String en);
 	

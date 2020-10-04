@@ -7,7 +7,7 @@ function addMemberConfirm()
 	$.ajax
     ({
 		type:		"POST",
-		url :		"http://localhost:8080/signup",
+		url :		"http://localhost:8080/admin/signup",
 		data:		JSON.stringify(MemberData),
 		contentType: "application/json; charset=UTF-8",
 		dataType:	"json",

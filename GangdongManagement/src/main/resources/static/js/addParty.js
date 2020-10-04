@@ -17,7 +17,7 @@ function addPartyConfirm()
 		$.ajax
         ({
 			type:		"POST",
-			url :		"http://localhost:8080/addParty",
+			url :		"http://localhost:8080/admin/addParty",
 			data:		JSON.stringify(partyData),
 			contentType: "application/json; charset=UTF-8",
 			dataType:	"json",
