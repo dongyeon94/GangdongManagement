@@ -180,7 +180,13 @@
 										</tr>
 									</tbody>
 								</table>
-							</div>									
+							</div>
+							<div class="mobile-add-party">
+								<select class="mobile-view-member">
+									<option selected disabled>참여한 사람을 선택하세요</option>
+									<option th:each="membetList : ${membetList}" th:value="${membetList.id}" th:text="${membetList.nickName}" ></option>
+								</select>
+							</div>
 						</div>
 					</form>
 					<button class="btn btn-primary" style="width:100%; margin-top:2%;" type="button" onclick="addPartyAjax()"> add party </button>			

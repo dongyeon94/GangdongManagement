@@ -1,12 +1,31 @@
 @charset "UTF-8";
 
-@media screen and (max-width: 400px) {
-    .Chart{
+@media screen and (max-width: 400px) 
+{
+    .Chart
+    {
     	display:none;
     }
-    .timeToday{
+    .timeToday
+    {
     	font-size:19px;
     	margin-top:10px;
     	margin-bottom:10px;
+    }
+    .table.member-table
+    {
+        display:none;
+    }
+    .mobile-add-party
+    {
+    	display: inline;
+    }
+}
+
+@media screen and (min-width: 405px) 
+{
+    .mobile-add-party
+    {
+    	display: none;
     }
 }

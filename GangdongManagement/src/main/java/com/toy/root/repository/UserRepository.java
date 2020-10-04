@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<DbUser, Long>{
 	void deleteById(@Param("user_id") Long i);	
 	
 	@Transactional
-	@Query(value = "SELECT * FROM user WHERE alive=1;" , nativeQuery = true)
+	@Query(value = "SELECT * FROM user WHERE alive=1 order by nickname;" , nativeQuery = true)
 	List<DbUser> findAllbyAlive();
 	
 	
