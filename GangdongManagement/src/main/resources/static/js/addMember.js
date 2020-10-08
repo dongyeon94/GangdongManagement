@@ -1,4 +1,5 @@
 var msg = "";
+var link = document.location.href; 
 function addMemberConfirm()
 {
 	var addMemberVal = jQuery(".addMember").serialize();
@@ -7,7 +8,7 @@ function addMemberConfirm()
 	$.ajax
     ({
 		type:		"POST",
-		url :		"http://localhost:8080/admin/signup",
+		url :		link + "signup",
 		data:		JSON.stringify(MemberData),
 		contentType: "application/json; charset=UTF-8",
 		dataType:	"json",

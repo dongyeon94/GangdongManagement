@@ -26,7 +26,7 @@
 </header>
 
 <nav class="navbar" style="background-color: #17a2b8;">
-	<button>개발자 메일 보내기</button>
+	<button onclick="test()">개발자 메일 보내기</button>
 </nav>
 
 
@@ -243,7 +243,13 @@
 <script type="text/javascript" th:src="@{/js/addParty.js}"></script>
 <script type="text/javascript" th:src="@{/js/addMember.js}"></script>
 <script type="text/javascript" th:src="@{/js/deleteMember.js}"></script>
+<script type="text/javascript">
+function test(){
+	var link = document.location.href; 
+	console.log(link);
 
+}
+</script>
 <script type="text/javascript" th:inline="javascript">
 var userlist=[];
 var userpartyAttendCount = [];

@@ -3,7 +3,7 @@ var userNicknameList =[];
 var partyDate = "";
 var partyTimes = "";
 var addPartyVal;
-
+var link = document.location.href;
 function addPartyConfirm()
 {
 	var partyData = {'datetimes' :partyDate,
@@ -17,7 +17,7 @@ function addPartyConfirm()
 		$.ajax
         ({
 			type:		"POST",
-			url :		"http://localhost:8080/admin/addParty",
+			url :		link + "addParty",
 			data:		JSON.stringify(partyData),
 			contentType: "application/json; charset=UTF-8",
 			dataType:	"json",

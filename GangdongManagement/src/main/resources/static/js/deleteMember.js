@@ -1,4 +1,5 @@
 var msg = "";
+var link = document.location.href;
 function deleteMemberConfirm()
 {
 	var deleteMemberVal = jQuery(".deleteUser").serialize().split('&');
@@ -14,7 +15,7 @@ function deleteMemberConfirm()
     $.ajax
     ({
 		type:		"POST",
-		url :		"http://localhost:8080/admin/deleteUser",
+		url :		link + "deleteUser",
 		data:		JSON.stringify(MemberData),
 		contentType: "application/json; charset=UTF-8",
 		dataType:	"json",
